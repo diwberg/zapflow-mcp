@@ -103,3 +103,52 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Analytics Setup
+
+The project includes analytics integration with multiple providers:
+- Google Analytics 4
+- Meta Pixel (Facebook)
+- Google Tag Manager
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```
+# Analytics Configuration
+# Replace with your actual IDs for production
+
+# Google Analytics (GA4)
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+
+# Meta Pixel (Facebook)
+NEXT_PUBLIC_META_PIXEL_ID=XXXXXXXXXXXXXXXXXX
+
+# Google Tag Manager
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+
+# Feature Flags - enable/disable specific analytics providers
+NEXT_PUBLIC_ANALYTICS_ENABLED=true
+NEXT_PUBLIC_GA_ENABLED=true
+NEXT_PUBLIC_META_ENABLED=true
+NEXT_PUBLIC_GTM_ENABLED=true
+```
+
+### Tracked Events
+
+The following events are automatically tracked:
+- Page views for all pages
+- Specific page view events for home and pricing pages
+- WhatsApp button clicks with source attribution
+
+You can add custom event tracking by importing the analytics service:
+
+```typescript
+import analytics from '@/lib/analytics';
+
+// Track a custom event
+analytics.event('event_name', 'event_category', { 
+  custom_param: 'value' 
+});
+```

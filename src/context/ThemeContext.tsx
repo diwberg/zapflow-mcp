@@ -1,77 +1,50 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-
-type Theme = 'light' | 'dark';
+import { ThemeProvider as NextThemeProvider, useTheme as useNextTheme } from 'next-themes';
 
 type ThemeContextType = {
-  theme: Theme;
+  theme: string | undefined;
+  setTheme: (theme: string) => void;
   toggleTheme: () => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light');
-  const [mounted, setMounted] = useState(false);
+  return (
+    <NextThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <ThemeProviderInternal>{children}</ThemeProviderInternal>
+    </NextThemeProvider>
+  );
+}
 
-  // Efeito único de inicialização quando o componente monta
+function ThemeProviderInternal({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useNextTheme();
+  
+  // Wait for component to mount to avoid hydration mismatch
   useEffect(() => {
-    try {
-      // Get initial theme from localStorage or system preference
-      let initialTheme: Theme = 'light';
-      
-      try {
-        const storedTheme = localStorage.getItem('theme') as Theme | null;
-        if (storedTheme === 'dark' || storedTheme === 'light') {
-          initialTheme = storedTheme;
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          initialTheme = 'dark';
-        }
-      } catch (e) {
-        console.warn('Error reading theme from localStorage:', e);
-      }
-      
-      setTheme(initialTheme);
-      
-      // Apply theme immediately to prevent flash
-      if (initialTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
-    } catch (e) {
-      console.error('Error initializing theme:', e);
-    } finally {
-      setMounted(true);
-    }
+    setMounted(true);
   }, []);
 
-  // Efeito separado para mudanças de tema
-  useEffect(() => {
-    if (!mounted) return;
-    
-    try {
-      // Update HTML element class when theme changes
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-        document.documentElement.classList.remove('light');
-      } else {
-        document.documentElement.classList.add('light');
-        document.documentElement.classList.remove('dark');
-      }
-      
-      // Save theme to localStorage
-      localStorage.setItem('theme', theme);
-    } catch (e) {
-      console.warn('Error updating theme:', e);
-    }
-  }, [theme, mounted]);
-
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'dark' ? 'light' : 'dark'));
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  const contextValue = {
+    theme,
+    setTheme,
+    toggleTheme
+  };
+
+  // Prevent hydration mismatch by only rendering after mount
+  if (!mounted) {
+    return <>{children}</>;
+  }
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   );

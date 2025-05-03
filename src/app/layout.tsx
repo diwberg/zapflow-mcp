@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import I18nProvider from "./i18n-provider";
 import ClientLayout from "@/components/layout/ClientLayout";
+import AnalyticsProvider from "@/components/providers/AnalyticsProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,9 +27,11 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased bg-background text-foreground`}>
         <ThemeProvider>
           <I18nProvider>
-            <ClientLayout>
-              {children}
-            </ClientLayout>
+            <AnalyticsProvider>
+              <ClientLayout>
+                {children}
+              </ClientLayout>
+            </AnalyticsProvider>
           </I18nProvider>
         </ThemeProvider>
       </body>

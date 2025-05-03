@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import analytics from '@/lib/analytics';
+import { usePathname } from 'next/navigation';
 
 interface WhatsAppButtonProps {
   className?: string;
@@ -9,6 +11,7 @@ interface WhatsAppButtonProps {
   fullWidth?: boolean;
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
+  source?: string;
 }
 
 const WhatsAppButton = ({
@@ -17,9 +20,19 @@ const WhatsAppButton = ({
   fullWidth = false,
   variant = 'primary',
   size = 'md',
+  source,
 }: WhatsAppButtonProps) => {
   const { t } = useTranslation();
+  const pathname = usePathname();
   const buttonText = text || t('cta.whatsapp');
+
+  // Generate source if not provided
+  const trackingSource = source || pathname || 'unknown';
+
+  const handleClick = () => {
+    // Track the WhatsApp button click
+    analytics.whatsApp(trackingSource);
+  };
 
   const buttonVariants = {
     initial: { scale: 1 },
@@ -58,6 +71,7 @@ const WhatsAppButton = ({
       whileHover="hover"
       whileTap="tap"
       variants={buttonVariants}
+      onClick={handleClick}
     >
       {buttonText}
     </motion.a>
