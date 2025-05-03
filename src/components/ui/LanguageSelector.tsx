@@ -54,7 +54,7 @@ export default function LanguageSelector() {
       
       {isOpen && (
         <div
-          className="absolute  right-0 mt-2 w-40 border border-border rounded-lg shadow-lg"
+          className="absolute right-0 mt-2 w-40 border border-border rounded-lg shadow-lg"
         >
           <div className="py-1">
             {languages.map((language) => (

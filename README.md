@@ -124,6 +124,7 @@ NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 
 # Meta Pixel (Facebook)
 NEXT_PUBLIC_META_PIXEL_ID=XXXXXXXXXXXXXXXXXX
+META_PIXEL_TOKEN=your-meta-pixel-token      # For server-side events and advanced features
 
 # Google Tag Manager
 NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX

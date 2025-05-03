@@ -12,15 +12,22 @@ const getEnvVar = (key: string): string => {
   return value || '';
 };
 
+// Server-side environment variable (for Meta Pixel Token)
+const getServerEnvVar = (key: string): string => {
+  const value = process.env[key];
+  return value || '';
+};
+
 // Feature flags
 const isAnalyticsEnabled = getEnvVar('ANALYTICS_ENABLED') === 'true';
 const isGAEnabled = isAnalyticsEnabled && getEnvVar('GA_ENABLED') === 'true';
 const isMetaEnabled = isAnalyticsEnabled && getEnvVar('META_ENABLED') === 'true';
 const isGTMEnabled = isAnalyticsEnabled && getEnvVar('GTM_ENABLED') === 'true';
 
-// IDs
+// IDs and Tokens
 const GA_ID = getEnvVar('GA_MEASUREMENT_ID');
 const META_PIXEL_ID = getEnvVar('META_PIXEL_ID');
+const META_PIXEL_TOKEN = getServerEnvVar('META_PIXEL_TOKEN');
 const GTM_ID = getEnvVar('GTM_ID');
 
 // Google Analytics
@@ -54,7 +61,7 @@ const initMeta = (): void => {
   // Prevent duplicate initialization
   if ((window as any).fbq) return;
   
-  // Add Meta Pixel script
+  // Add Meta Pixel script with token if available
   const script = document.createElement('script');
   script.innerHTML = `
     !function(f,b,e,v,n,t,s)
@@ -65,9 +72,20 @@ const initMeta = (): void => {
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '${META_PIXEL_ID}');
+    fbq('init', '${META_PIXEL_ID}'${META_PIXEL_TOKEN ? `, {
+      external_id: '${META_PIXEL_TOKEN}'
+    }` : ''});
   `;
   document.head.appendChild(script);
+  
+  // Add noscript pixel for browsers with JavaScript disabled
+  const noscript = document.createElement('noscript');
+  noscript.innerHTML = `
+    <img height="1" width="1" style="display:none" 
+      src="https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1"
+    />
+  `;
+  document.body.appendChild(noscript);
 };
 
 // Google Tag Manager
@@ -118,7 +136,10 @@ export const trackPageView = (url: string, title: string = ''): void => {
     
     // Meta Pixel
     if (isMetaEnabled && (window as any).fbq) {
-      (window as any).fbq('track', 'PageView');
+      (window as any).fbq('track', 'PageView', {
+        page_path: url,
+        page_title: title || document.title
+      });
     }
     
     // GTM (already tracks page views automatically)
@@ -149,9 +170,30 @@ export const trackEvent = (
       (window as any).gtag('event', eventName, eventParams);
     }
     
-    // Meta Pixel
+    // Meta Pixel - Convert to standard Meta event name if possible
     if (isMetaEnabled && (window as any).fbq) {
-      (window as any).fbq('track', eventName, params);
+      // Check if this is a standard Meta event
+      const metaStandardEvents = [
+        'AddPaymentInfo', 'AddToCart', 'AddToWishlist', 'CompleteRegistration', 
+        'Contact', 'CustomizeProduct', 'Donate', 'FindLocation', 'InitiateCheckout', 
+        'Lead', 'Purchase', 'Schedule', 'Search', 'StartTrial', 'SubmitApplication', 
+        'Subscribe', 'ViewContent'
+      ];
+      
+      // Convert event name to proper Meta format (first letter capitalized, no spaces)
+      const formattedEventName = eventName
+        .split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join('');
+      
+      // Use standard event if available, otherwise use custom event
+      const isStandardEvent = metaStandardEvents.includes(formattedEventName);
+      
+      if (isStandardEvent) {
+        (window as any).fbq('track', formattedEventName, params);
+      } else {
+        (window as any).fbq('trackCustom', formattedEventName, params);
+      }
     }
     
     // Google Tag Manager
@@ -174,6 +216,15 @@ export const trackWhatsAppClick = (source: string): void => {
     source,
     timestamp: new Date().toISOString()
   });
+  
+  // Also track as Meta Lead event for better ad optimization
+  if (isMetaEnabled && (window as any).fbq) {
+    (window as any).fbq('track', 'Lead', { 
+      content_name: 'WhatsApp Click',
+      content_category: 'Engagement',
+      source: source
+    });
+  }
 };
 
 // Track home page view
