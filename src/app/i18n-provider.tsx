@@ -8,6 +8,11 @@ interface I18nProviderProps {
   children: ReactNode;
 }
 
+// Renderização do lado do cliente apenas
+function ClientI18n({ children }: { children: ReactNode }) {
+  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+}
+
 export default function I18nProvider({ children }: I18nProviderProps) {
   const [mounted, setMounted] = useState(false);
 
@@ -20,10 +25,11 @@ export default function I18nProvider({ children }: I18nProviderProps) {
     }
   }, []);
 
-  // Não renderiza nada até que o componente esteja montado para evitar erros de hidratação
+  // Não renderiza o contexto de i18n até que o componente esteja montado
+  // para evitar erros de hidratação
   if (!mounted) {
     return <>{children}</>;
   }
 
-  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+  return <ClientI18n>{children}</ClientI18n>;
 } 

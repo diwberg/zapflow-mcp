@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
@@ -8,9 +8,30 @@ import ThemeToggle from '../ui/ThemeToggle';
 import LanguageSelector from '../ui/LanguageSelector';
 import { useTranslation } from 'react-i18next';
 
+// Valores fallback para tradução durante SSR
+const fallbackTranslations = {
+  'nav.home': 'Início',
+  'nav.pricing': 'Preços',
+  'nav.whatsapp': 'Chamar no WhatsApp'
+};
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { t } = useTranslation();
+  const { t, ready } = useTranslation();
+  const [mounted, setMounted] = useState(false);
+
+  // Montar o componente apenas no cliente
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Função segura de tradução que usa fallback durante SSR/hidratação
+  const safeT = (key: string) => {
+    if (!mounted || !ready) {
+      return fallbackTranslations[key as keyof typeof fallbackTranslations] || key;
+    }
+    return t(key);
+  };
 
   return (
     <nav className="bg-background/80 backdrop-blur-md border-b border-border py-4 sticky top-0 z-50 transition-colors duration-300">
@@ -23,10 +44,10 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex md:items-center md:space-x-6">
           <Link href="/" className="text-foreground hover:text-primary font-medium transition-colors">
-            {t('nav.home')}
+            {safeT('nav.home')}
           </Link>
           <Link href="/precos" className="text-foreground hover:text-primary font-medium transition-colors">
-            {t('nav.pricing')}
+            {safeT('nav.pricing')}
           </Link>
           
           {/* Theme and Language Controls */}
@@ -41,7 +62,7 @@ const Navbar = () => {
             rel="noopener noreferrer" 
             className="btn-primary py-2 px-4"
           >
-            {t('nav.whatsapp')}
+            {safeT('nav.whatsapp')}
           </a>
         </div>
 
@@ -68,14 +89,14 @@ const Navbar = () => {
               className="text-foreground hover:text-primary font-medium py-2 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t('nav.home')}
+              {safeT('nav.home')}
             </Link>
             <Link 
               href="/precos" 
               className="text-foreground hover:text-primary font-medium py-2 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t('nav.pricing')}
+              {safeT('nav.pricing')}
             </Link>
             <a 
               href="https://wa.me/SEUNUMERO?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
@@ -84,7 +105,7 @@ const Navbar = () => {
               className="btn-primary py-2 px-4 text-center"
               onClick={() => setIsMenuOpen(false)}
             >
-              {t('nav.whatsapp')}
+              {safeT('nav.whatsapp')}
             </a>
           </div>
         </div>

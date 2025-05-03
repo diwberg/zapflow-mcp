@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -9,6 +9,18 @@ interface ClientLayoutProps {
 }
 
 const ClientLayout = ({ children }: ClientLayoutProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Enquanto não estiver montado, renderize apenas o conteúdo principal
+  // sem Navbar ou Footer para evitar erros de hidratação
+  if (!isMounted) {
+    return <div suppressHydrationWarning>{children}</div>;
+  }
+
   return (
     <>
       <Navbar />
