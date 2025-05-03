@@ -6,26 +6,24 @@ type EventParams = {
   [key: string]: string | number | boolean | undefined;
 };
 
-// Define window global types
+// Define window global types with proper typing
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
-    fbq?: (...args: any[]) => void;
-    dataLayer?: any[];
+    gtag?: (command: string, ...args: unknown[]) => void;
+    fbq?: (command: string, event: string, params?: Record<string, unknown>) => void;
+    dataLayer?: Record<string, unknown>[];
   }
 }
 
 // Environment variable validation with fallbacks
 const getEnvVar = (key: string): string => {
   const value = process.env[`NEXT_PUBLIC_${key}`];
-  console.log(`[Analytics Debug] Reading env var NEXT_PUBLIC_${key}: ${value ? 'Found' : 'Not found'}`);
   return value || '';
 };
 
 // Server-side environment variable (for Meta Pixel Token)
 const getServerEnvVar = (key: string): string => {
   const value = process.env[key];
-  console.log(`[Analytics Debug] Reading server env var ${key}: ${value ? 'Found' : 'Not found'}`);
   return value || '';
 };
 
@@ -35,30 +33,20 @@ const isGAEnabled = isAnalyticsEnabled && getEnvVar('GA_ENABLED') === 'true';
 const isMetaEnabled = isAnalyticsEnabled && getEnvVar('META_ENABLED') === 'true';
 const isGTMEnabled = isAnalyticsEnabled && getEnvVar('GTM_ENABLED') === 'true';
 
-console.log(`[Analytics Debug] Status - Analytics: ${isAnalyticsEnabled}, GA: ${isGAEnabled}, Meta: ${isMetaEnabled}, GTM: ${isGTMEnabled}`);
-
 // IDs and Tokens
 const GA_ID = getEnvVar('GA_MEASUREMENT_ID');
-const META_PIXEL_ID = getEnvVar('META_PIXEL_ID');
+const META_PIXEL_ID = getEnvVar('NEXT_PUBLIC_META_PIXEL_ID');
 const META_PIXEL_TOKEN = getServerEnvVar('META_PIXEL_TOKEN');
 const GTM_ID = getEnvVar('GTM_ID');
 
 // Google Analytics
 const initGA = (): void => {
-  if (!isGAEnabled || !GA_ID) {
-    console.log('[Analytics Debug] Skipping GA initialization: disabled or missing ID');
-    return;
-  }
+  if (!isGAEnabled || !GA_ID) return;
   
   // Prevent duplicate initialization
-  if (window.gtag) {
-    console.log('[Analytics Debug] GA already initialized');
-    return;
-  }
+  if (window.gtag) return;
   
   try {
-    console.log(`[Analytics Debug] Initializing GA with ID: ${GA_ID}`);
-    
     // Add Google Analytics script
     const script1 = document.createElement('script');
     script1.async = true;
@@ -74,28 +62,19 @@ const initGA = (): void => {
       gtag('config', '${GA_ID}', { send_page_view: false });
     `;
     document.head.appendChild(script2);
-    console.log('[Analytics Debug] GA scripts added');
   } catch (error) {
-    console.error('[Analytics Debug] Error initializing GA:', error);
+    console.error('Error initializing GA:', error);
   }
 };
 
 // Meta Pixel
 const initMeta = (): void => {
-  if (!isMetaEnabled || !META_PIXEL_ID) {
-    console.log('[Analytics Debug] Skipping Meta initialization: disabled or missing ID');
-    return;
-  }
+  if (!isMetaEnabled || !META_PIXEL_ID) return;
   
   // Prevent duplicate initialization
-  if (window.fbq) {
-    console.log('[Analytics Debug] Meta Pixel already initialized');
-    return;
-  }
+  if (window.fbq) return;
   
   try {
-    console.log(`[Analytics Debug] Initializing Meta Pixel with ID: ${META_PIXEL_ID}`);
-    
     // Add Meta Pixel script with token if available
     const script = document.createElement('script');
     script.innerHTML = `
@@ -121,28 +100,19 @@ const initMeta = (): void => {
       />
     `;
     document.body.appendChild(noscript);
-    console.log('[Analytics Debug] Meta Pixel scripts added');
   } catch (error) {
-    console.error('[Analytics Debug] Error initializing Meta Pixel:', error);
+    console.error('Error initializing Meta Pixel:', error);
   }
 };
 
 // Google Tag Manager
 const initGTM = (): void => {
-  if (!isGTMEnabled || !GTM_ID) {
-    console.log('[Analytics Debug] Skipping GTM initialization: disabled or missing ID');
-    return;
-  }
+  if (!isGTMEnabled || !GTM_ID) return;
   
   // Prevent duplicate initialization
-  if (window.dataLayer) {
-    console.log('[Analytics Debug] GTM already initialized');
-    return;
-  }
+  if (window.dataLayer) return;
   
   try {
-    console.log(`[Analytics Debug] Initializing GTM with ID: ${GTM_ID}`);
-    
     // Add GTM script
     const script = document.createElement('script');
     script.innerHTML = `
@@ -167,57 +137,31 @@ const initGTM = (): void => {
     } else {
       document.body.appendChild(noscript);
     }
-    
-    console.log('[Analytics Debug] GTM scripts added');
   } catch (error) {
-    console.error('[Analytics Debug] Error initializing GTM:', error);
+    console.error('Error initializing GTM:', error);
   }
 };
 
 // Initialize all analytics
 export const initAnalytics = (): void => {
-  if (typeof window === 'undefined') {
-    console.log('[Analytics Debug] Skipping initialization: not in browser');
-    return;
-  }
-  
-  console.log('[Analytics Debug] Starting analytics initialization');
+  if (typeof window === 'undefined') return;
   
   try {
-    // Check if needed variables are available
-    if (!isAnalyticsEnabled) {
-      console.log('[Analytics Debug] Analytics is disabled via environment variable');
-      return;
-    }
-    
-    if (!GA_ID && !META_PIXEL_ID && !GTM_ID) {
-      console.warn('[Analytics Debug] No analytics IDs found in environment variables');
-    }
-    
-    // Initialize each service
     initGA();
     initMeta();
     initGTM();
-    
-    console.log('[Analytics Debug] Analytics initialized successfully');
   } catch (error) {
-    console.error('[Analytics Debug] Analytics initialization error:', error);
+    console.error('Analytics initialization error:', error);
   }
 };
 
 // Track page view
 export const trackPageView = (url: string, title: string = ''): void => {
-  if (typeof window === 'undefined' || !isAnalyticsEnabled) {
-    console.log('[Analytics Debug] Skipping page view tracking: not in browser or analytics disabled');
-    return;
-  }
+  if (typeof window === 'undefined' || !isAnalyticsEnabled) return;
   
   try {
-    console.log(`[Analytics Debug] Tracking page view: ${url}`);
-    
     // Google Analytics
     if (isGAEnabled && window.gtag) {
-      console.log('[Analytics Debug] Sending to GA: page_view');
       window.gtag('event', 'page_view', {
         page_location: url,
         page_title: title || document.title
@@ -226,17 +170,13 @@ export const trackPageView = (url: string, title: string = ''): void => {
     
     // Meta Pixel
     if (isMetaEnabled && window.fbq) {
-      console.log('[Analytics Debug] Sending to Meta Pixel: PageView');
       window.fbq('track', 'PageView', {
         page_path: url,
         page_title: title || document.title
       });
     }
-    
-    // GTM (already tracks page views automatically)
-    console.log(`[Analytics Debug] Page view tracked: ${url}`);
   } catch (error) {
-    console.error('[Analytics Debug] Page view tracking error:', error);
+    console.error('Page view tracking error:', error);
   }
 };
 
@@ -246,14 +186,9 @@ export const trackEvent = (
   category: string,
   params: EventParams = {}
 ): void => {
-  if (typeof window === 'undefined' || !isAnalyticsEnabled) {
-    console.log('[Analytics Debug] Skipping event tracking: not in browser or analytics disabled');
-    return;
-  }
+  if (typeof window === 'undefined' || !isAnalyticsEnabled) return;
   
   try {
-    console.log(`[Analytics Debug] Tracking event: ${eventName}, category: ${category}`);
-    
     // Prepare params
     const eventParams = {
       event_category: category,
@@ -262,8 +197,7 @@ export const trackEvent = (
     
     // Google Analytics
     if (isGAEnabled && window.gtag) {
-      console.log(`[Analytics Debug] Sending to GA: ${eventName}`);
-      window.gtag('event', eventName, eventParams);
+      window.gtag('event', eventName, eventParams as Record<string, unknown>);
     }
     
     // Meta Pixel - Convert to standard Meta event name if possible
@@ -286,33 +220,26 @@ export const trackEvent = (
       const isStandardEvent = metaStandardEvents.includes(formattedEventName);
       
       if (isStandardEvent) {
-        console.log(`[Analytics Debug] Sending to Meta Pixel standard event: ${formattedEventName}`);
-        window.fbq('track', formattedEventName, params);
+        window.fbq('track', formattedEventName, params as Record<string, unknown>);
       } else {
-        console.log(`[Analytics Debug] Sending to Meta Pixel custom event: ${formattedEventName}`);
-        window.fbq('trackCustom', formattedEventName, params);
+        window.fbq('trackCustom', formattedEventName, params as Record<string, unknown>);
       }
     }
     
     // Google Tag Manager
     if (isGTMEnabled && window.dataLayer) {
-      console.log(`[Analytics Debug] Sending to GTM: ${eventName}`);
       window.dataLayer.push({
         event: eventName,
         ...eventParams
       });
     }
-    
-    console.log(`[Analytics Debug] Event tracked: ${eventName}`, eventParams);
   } catch (error) {
-    console.error('[Analytics Debug] Event tracking error:', error);
+    console.error('Event tracking error:', error);
   }
 };
 
 // Track WhatsApp click
 export const trackWhatsAppClick = (source: string): void => {
-  console.log(`[Analytics Debug] Tracking WhatsApp click from: ${source}`);
-  
   trackEvent('whatsapp_click', 'engagement', { 
     source,
     timestamp: new Date().toISOString()
@@ -320,7 +247,6 @@ export const trackWhatsAppClick = (source: string): void => {
   
   // Also track as Meta Lead event for better ad optimization
   if (isMetaEnabled && window.fbq) {
-    console.log('[Analytics Debug] Sending to Meta Pixel: Lead (WhatsApp click)');
     window.fbq('track', 'Lead', { 
       content_name: 'WhatsApp Click',
       content_category: 'Engagement',
