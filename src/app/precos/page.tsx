@@ -6,12 +6,6 @@ import SectionTitle from '@/components/ui/SectionTitle';
 import PricingTable from '@/components/ui/PricingTable';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import { PricingItem } from '@/components/ui/PricingTable';
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Preços | Zapflow MCP',
-  description: 'Conheça os preços das aplicações disponíveis no Zapflow MCP.',
-};
 
 export default function PricingPage() {
   const { t } = useTranslation();

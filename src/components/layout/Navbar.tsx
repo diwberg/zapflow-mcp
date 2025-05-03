@@ -60,7 +60,7 @@ const Navbar = () => {
             href="https://wa.me/SEUNUMERO?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
             target="_blank"
             rel="noopener noreferrer" 
-            className="btn-primary py-2 px-4"
+            className="btn-primary py-2 px-4 rounded-2xl"
           >
             {safeT('nav.whatsapp')}
           </a>

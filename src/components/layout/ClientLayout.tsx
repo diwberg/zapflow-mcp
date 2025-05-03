@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import CookieBanner from '../ui/CookieBanner';
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -26,6 +27,7 @@ const ClientLayout = ({ children }: ClientLayoutProps) => {
       <Navbar />
       {children}
       <Footer />
+      <CookieBanner />
     </>
   );
 };

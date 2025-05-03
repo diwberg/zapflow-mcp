@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
@@ -42,19 +44,33 @@ const Footer = () => {
                   {t('footer.privacy')}
                 </Link>
               </li>
+              <li>
+                <Link href="/termos" className="text-muted hover:text-primary transition-colors">
+                  {t('footer.terms')}
+                </Link>
+              </li>
             </ul>
           </div>
           
           <div>
-            <h3 className="font-bold text-foreground mb-4">{t('footer.applications')}</h3>
-            <ul className="space-y-2">
-              <li className="text-muted">PostgreSQL</li>
-              <li className="text-muted">Redis</li>
-              <li className="text-muted">MySQL</li>
-              <li className="text-muted">N8N</li>
-              <li className="text-muted">WordPress</li>
-              <li className="text-muted">Evolution API</li>
-            </ul>
+            <h3 className="font-bold text-foreground mb-4">{t('footer.contact')}</h3>
+            <p className="text-muted mb-4">
+              {t('footer.contactDescription')}
+            </p>
+            <div className="text-muted">
+              <div className="flex items-center gap-2 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M14.243 5.757a6 6 0 10-8.486 8.486l4.243 4.243 4.243-4.243a6 6 0 000-8.486zm-1.414 7.072l-2.829 2.829-2.829-2.829a4 4 0 115.657-5.657 4 4 0 010 5.657z" clipRule="evenodd" />
+                </svg>
+                <span>Brasil</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+                <span>WhatsApp: +55 (XX) XXXX-XXXX</span>
+              </div>
+            </div>
           </div>
         </div>
         

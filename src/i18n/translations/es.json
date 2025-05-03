@@ -122,6 +122,7 @@
     "tagline": "Solicita tu aplicación por WhatsApp. Usa en minutos.",
     "quickLinks": "Enlaces Rápidos",
     "privacy": "Política de Privacidad",
+    "terms": "Términos de Uso",
     "applications": "Aplicaciones",
     "contact": "Contáctanos",
     "contactDescription": "Estamos disponibles 24/7 vía WhatsApp para ayudarte con cualquier pregunta.",
@@ -172,5 +173,101 @@
   },
   "language": {
     "selectLanguage": "Seleccionar idioma"
+  },
+  "cookies": {
+    "title": "Este sitio utiliza cookies",
+    "description": "Utilizamos cookies para mejorar tu experiencia de navegación, personalizar contenido y analizar nuestro tráfico. Al continuar navegando, aceptas nuestra Política de Privacidad.",
+    "accept": "Aceptar todas",
+    "reject": "Aceptar solo esenciales",
+    "settings": "Configuración",
+    "learnMore": "Saber más"
+  },
+  "privacyPolicy": {
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última actualización:",
+    "introduction": {
+      "title": "Introducción",
+      "content": "Zapflow MCP está comprometido a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos tu información personal cuando utilizas nuestro sitio web y servicios."
+    },
+    "informationCollected": {
+      "title": "Información que recopilamos",
+      "content": "Podemos recopilar información personal como tu nombre, dirección de correo electrónico, número de teléfono e información de pago cuando solicitas nuestros servicios. También recopilamos información de uso, como tu dirección IP, tipo de navegador y páginas visitadas."
+    },
+    "useOfInformation": {
+      "title": "Cómo usamos tu información",
+      "content": "Utilizamos tu información para proporcionar y mejorar nuestros servicios, procesar pagos, enviar comunicaciones relevantes y cumplir con obligaciones legales."
+    },
+    "dataSecurity": {
+      "title": "Seguridad de datos",
+      "content": "Implementamos medidas de seguridad técnicas y organizativas para proteger tu información personal contra acceso no autorizado, alteración, divulgación o destrucción."
+    },
+    "thirdParties": {
+      "title": "Compartir con terceros",
+      "content": "Podemos compartir tu información con proveedores de servicios externos que nos ayudan a proporcionar nuestros servicios. Estos terceros están obligados a proteger tu información."
+    },
+    "yourRights": {
+      "title": "Tus derechos",
+      "content": "Tienes derecho a acceder, corregir, eliminar o exportar tu información personal. Para ejercer estos derechos, contáctanos a través de WhatsApp."
+    },
+    "cookies": {
+      "title": "Uso de cookies",
+      "content": "Utilizamos cookies para mejorar tu experiencia de navegación, personalizar contenido y analizar nuestro tráfico. Puedes controlar el uso de cookies a través de la configuración de tu navegador."
+    },
+    "changes": {
+      "title": "Cambios en esta política",
+      "content": "Podemos actualizar esta política periódicamente. La fecha de la última actualización se indicará al comienzo del documento."
+    },
+    "contact": {
+      "title": "Contacto",
+      "content": "Si tienes preguntas sobre esta Política de Privacidad, contáctanos por WhatsApp."
+    }
+  },
+  "termsOfService": {
+    "title": "Términos de Uso",
+    "lastUpdated": "Última actualización:",
+    "introduction": {
+      "title": "Introducción",
+      "content": "Bienvenido a Zapflow MCP. Estos Términos de Uso rigen tu acceso y uso de nuestro sitio web y servicios. Al acceder o utilizar nuestros servicios, aceptas quedar vinculado a estos términos."
+    },
+    "serviceDescription": {
+      "title": "Descripción del servicio",
+      "content": "Zapflow MCP proporciona servicios de aprovisionamiento de aplicaciones bajo demanda vía WhatsApp, con infraestructura automatizada."
+    },
+    "userAccounts": {
+      "title": "Cuentas de usuario",
+      "content": "Para utilizar nuestros servicios, debes proporcionar información precisa y mantener seguras tus credenciales de acceso."
+    },
+    "paymentTerms": {
+      "title": "Términos de pago",
+      "content": "Los servicios incluyen 1 hora gratuita de prueba. Después de este período, se cobrará una tarifa mensual recurrente. El impago después de 10 días resultará en la cancelación automática del servicio y la eliminación de datos."
+    },
+    "userConduct": {
+      "title": "Conducta del usuario",
+      "content": "Aceptas utilizar nuestros servicios solo para fines legales y de acuerdo con estos términos. Está prohibido utilizar nuestros servicios para actividades ilegales o dañinas."
+    },
+    "intellectualProperty": {
+      "title": "Propiedad intelectual",
+      "content": "Todo el contenido y software disponible a través de nuestros servicios son propiedad de Zapflow MCP o de sus licenciantes y están protegidos por leyes de propiedad intelectual."
+    },
+    "limitation": {
+      "title": "Limitación de responsabilidad",
+      "content": "En ningún caso Zapflow MCP será responsable por daños indirectos, incidentales, especiales o consecuentes resultantes del uso de nuestros servicios."
+    },
+    "termination": {
+      "title": "Terminación",
+      "content": "Podemos terminar o suspender tu acceso a nuestros servicios inmediatamente, sin previo aviso o responsabilidad, por cualquier motivo."
+    },
+    "changes": {
+      "title": "Cambios en los términos",
+      "content": "Nos reservamos el derecho de modificar estos términos en cualquier momento. Al continuar usando nuestros servicios después de tales modificaciones, aceptas los términos revisados."
+    },
+    "governingLaw": {
+      "title": "Ley aplicable",
+      "content": "Estos términos se rigen e interpretan de acuerdo con las leyes de Brasil."
+    },
+    "contact": {
+      "title": "Contacto",
+      "content": "Si tienes preguntas sobre estos Términos de Uso, contáctanos por WhatsApp."
+    }
   }
 } 

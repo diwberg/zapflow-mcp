@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { ChevronDoubleDownIcon } from '@heroicons/react/24/outline';
+import CookieBanner from '../ui/CookieBanner';
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -201,6 +202,8 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           <ChevronDoubleDownIcon className="h-6 w-6 text-primary animate-pulse" />
         </motion.div>
       )}
+
+      <CookieBanner />
     </div>
   );
 };
