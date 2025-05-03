@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "home": "Home",
+    "pricing": "Pricing",
+    "whatsapp": "Contact on WhatsApp",
+    "overview": "Overview",
+    "features": "Features",
+    "about": "About"
+  },
+  "cta": {
+    "whatsapp": "Contact on WhatsApp",
+    "request": "Request",
+    "getStarted": "Get Started"
+  },
+  "hero": {
+    "badge": "By AI, in real-time",
+    "title": "Request your application via WhatsApp. Use it in minutes.",
+    "description": "Zapflow MCP delivers PostgreSQL, Redis, N8N and much more, on demand via AI. Request, pay and use."
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Our process is 100% automated and AI-driven. Request, test and use in minutes.",
+    "badge": "Simple process",
+    "steps": [
+      {
+        "title": "Send a message",
+        "description": "Tell us what you need via WhatsApp. Ex: 'I want a Postgres database for my project'."
+      },
+      {
+        "title": "AI provisions",
+        "description": "Our system processes your request, creates the infrastructure and configures automatically."
+      },
+      {
+        "title": "Test for free",
+        "description": "Receive access credentials immediately and test for 1 hour at no cost or commitment."
+      },
+      {
+        "title": "Pay and use",
+        "description": "After approval, make the payment and keep your service active monthly."
+      }
+    ]
+  },
+  "applications": {
+    "title": "Available Applications",
+    "subtitle": "A variety of services ready to use, optimized for performance and security.",
+    "items": [
+      {
+        "title": "PostgreSQL",
+        "description": "Robust and reliable relational database for your applications."
+      },
+      {
+        "title": "Redis",
+        "description": "Ultra-fast in-memory storage for caching and session management."
+      },
+      {
+        "title": "MySQL",
+        "description": "Lightweight and versatile SQL database, ideal for web applications."
+      },
+      {
+        "title": "N8N",
+        "description": "Workflow automation platform with an intuitive visual interface."
+      },
+      {
+        "title": "WordPress",
+        "description": "Complete CMS for creating websites, blogs and landing pages."
+      },
+      {
+        "title": "Evolution API",
+        "description": "Backend for APIs with fast deployment and automatic scaling."
+      }
+    ]
+  },
+  "advantages": {
+    "title": "Advantages",
+    "subtitle": "Why choose Zapflow MCP for your infrastructure needs.",
+    "items": [
+      {
+        "title": "No technical complications",
+        "description": "Forget complex configurations. Just say what you need and AI takes care of the rest."
+      },
+      {
+        "title": "Ready for real use",
+        "description": "Infrastructure optimized for performance and security in production environment."
+      },
+      {
+        "title": "AI support",
+        "description": "24/7 service by AI that understands your needs and solves problems quickly."
+      },
+      {
+        "title": "Fair and transparent pricing",
+        "description": "Pay only for what you use, with automatic cancellation if there is no payment."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "What our customers say",
+    "items": [
+      {
+        "content": "I needed a Postgres database urgently for a project. In 5 minutes everything was working. It's almost magic!",
+        "author": "Carlos Silva",
+        "role": "Full-Stack Developer"
+      },
+      {
+        "content": "The ease of requesting and receiving access via WhatsApp is revolutionary. I saved hours of configuration.",
+        "author": "Ana Martins",
+        "role": "DevOps Engineer"
+      },
+      {
+        "content": "I've tried several similar services, but the combination of AI with automatic provisioning from Zapflow is unbeatable.",
+        "author": "Roberto Almeida",
+        "role": "Tech Lead"
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Start now via WhatsApp",
+    "description": "Request your application and get access in minutes. First hour free for testing.",
+    "readyToStart": "Ready to start?",
+    "requestNow": "Request your application now and test for 1 hour for free."
+  },
+  "footer": {
+    "tagline": "Request your application on WhatsApp. Use in minutes.",
+    "quickLinks": "Quick Links",
+    "privacy": "Privacy Policy",
+    "applications": "Applications",
+    "contact": "Contact Us",
+    "contactDescription": "We are available 24/7 via WhatsApp to help with any questions.",
+    "copyright": "All rights reserved."
+  },
+  "pricing": {
+    "title": "Monthly Prices",
+    "subtitle": "Choose the ideal application for your needs",
+    "freeHour": "1 hour free",
+    "freeHourDescription": "All services include 1 free hour for testing. Recurring monthly payment. Automatic cancellation if no payment after 10 days.",
+    "pricingHero": {
+      "title": "Simple and Transparent Pricing",
+      "subtitle": "All applications include 1 hour free trial. Recurring monthly billing."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How does billing work?",
+        "answer": "After the 1-hour free period, you will be billed monthly. Payment is made via credit card or other available methods."
+      },
+      {
+        "question": "Can I cancel at any time?",
+        "answer": "Yes, you can cancel anytime via WhatsApp. There is no minimum commitment period or cancellation fees."
+      },
+      {
+        "question": "What happens if I don't pay?",
+        "answer": "After 10 days without payment, the service is terminated and data is automatically deleted."
+      },
+      {
+        "question": "Is there technical support?",
+        "answer": "Yes, we offer technical support via WhatsApp 24/7 through our AI assistant."
+      },
+      {
+        "question": "Can I request custom applications?",
+        "answer": "Yes, besides standard applications, we can fulfill specific requests. Prices and availability upon request."
+      },
+      {
+        "question": "How do I receive access?",
+        "answer": "You'll receive credentials and access URLs directly on WhatsApp as soon as your application is ready."
+      }
+    ]
+  },
+  "theme": {
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
+  },
+  "language": {
+    "selectLanguage": "Select language"
+  }
+} 

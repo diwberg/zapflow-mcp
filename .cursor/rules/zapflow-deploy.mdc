@@ -1,0 +1,71 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+<project>
+  <name>Zapflow MCP</name>
+  <description>
+    Plataforma que provisiona aplicações sob demanda via WhatsApp, utilizando um agente de IA que entende pedidos em linguagem natural.
+    A infraestrutura é automatizada com Dokploy ou Coolify. As aplicações são criadas e entregues com URLs e credenciais.
+    O modelo é pay-to-use, com 1 hora gratuita para teste e cobrança mensal recorrente.
+  </description>
+
+  <rules>
+
+    <!-- Design & UX -->
+    <rule>
+      Use layout moderno, minimalista e sofisticado.
+      Interfaces devem ser limpas, com espaçamento adequado, tipografia consistente (preferência por "Inter").
+      Use movimentações sutis no hover (ex: suavidade no botão ao seguir o mouse).
+      Posicionamento sempre responsivo, priorizando mobile-first com facilidade de leitura e ação.
+    </rule>
+
+    <!-- Componentes e Validação -->
+    <rule>
+      Use sempre validação com Zod em todos os formulários.
+      Formulários devem ter mensagens claras de erro, foco automático no primeiro campo inválido, e feedback visual imediato.
+    </rule>
+
+    <!-- Boas práticas de código -->
+    <rule>
+      Use componentes reutilizáveis com boas práticas.
+      Prefira `async/await`, clean code, e evite lógica acoplada à interface.
+      Documente funções e componentes não triviais.
+    </rule>
+
+    <!-- README e documentação -->
+    <rule>
+      Mantenha o arquivo README.md atualizado.
+      Ele deve incluir: descrição do projeto, instruções de instalação, tecnologias usadas, comandos de desenvolvimento/deploy, estrutura de pastas, e visão geral da arquitetura.
+      Sempre que houver mudanças significativas ou inclusão de novas funcionalidades, adicione uma seção "Changelog" no README com a descrição das melhorias aplicadas.
+    </rule>
+
+    <!-- Persistência de contexto de tarefas longas -->
+    <rule>
+      Crie um arquivo chamado `memory-bank.md` na raiz do projeto.
+      Use este arquivo para registrar tarefas longas em execução, decisões pendentes, passos a seguir e contexto relevante.
+      Caso a IA ou o sistema seja interrompido, a leitura desse arquivo permitirá retomar o trabalho corretamente.
+      Exemplo de uso:
+      - [ ] Criar sistema de cancelamento automático após 10 dias de inadimplência.
+      - [ ] Validar integração do provisionamento Coolify com retorno de status.
+    </rule>
+
+    <!-- Estilo de commit (opcional) -->
+    <rule>
+      Utilize convenção de commit semântico: 
+      - feat: Nova funcionalidade
+      - fix: Correção de bug
+      - chore: Atualizações sem impacto direto
+      - docs: Atualização de documentação
+      - refactor: Refatoração sem alterar funcionalidade
+    </rule>
+
+    <!-- Testes -->
+    <rule>
+      Avaliar a necessidade de testes unitários após cada funcionalidade implementada.
+      Se aplicável, criar testes com Jest ou Vitest, priorizando lógica de negócio e funções críticas.
+    </rule>
+
+  </rules>
+</project>

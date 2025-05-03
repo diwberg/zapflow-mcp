@@ -1,0 +1,176 @@
+{
+  "nav": {
+    "home": "Início",
+    "pricing": "Preços",
+    "whatsapp": "Chamar no WhatsApp",
+    "overview": "Início",
+    "features": "Recursos",
+    "about": "Sobre"
+  },
+  "cta": {
+    "whatsapp": "Chamar no WhatsApp",
+    "request": "Solicitar",
+    "getStarted": "Começar agora"
+  },
+  "hero": {
+    "badge": "Pela IA, em tempo real",
+    "title": "Peça sua aplicação via WhatsApp. Use em minutos.",
+    "description": "Zapflow MCP entrega PostgreSQL, Redis, N8N e muito mais, sob demanda via IA. Solicite, pague e utilize."
+  },
+  "howItWorks": {
+    "title": "Como Funciona",
+    "subtitle": "Nosso processo é 100% automatizado e orientado por IA. Solicite, teste e utilize em minutos.",
+    "badge": "Processo simples",
+    "steps": [
+      {
+        "title": "Envie uma mensagem",
+        "description": "Diga o que precisa por WhatsApp. Ex: 'Quero um banco Postgres para meu projeto'."
+      },
+      {
+        "title": "A IA provisiona",
+        "description": "Nosso sistema processa seu pedido, cria a infraestrutura e configura automaticamente."
+      },
+      {
+        "title": "Teste gratuitamente",
+        "description": "Receba os acessos imediatamente e teste por 1 hora sem custo ou compromisso."
+      },
+      {
+        "title": "Pague e use",
+        "description": "Após aprovar, faça o pagamento e mantenha seu serviço ativo mensalmente."
+      }
+    ]
+  },
+  "applications": {
+    "title": "Aplicações Disponíveis",
+    "subtitle": "Uma variedade de serviços prontos para uso, otimizados para performance e segurança.",
+    "items": [
+      {
+        "title": "PostgreSQL",
+        "description": "Banco de dados relacional robusto e confiável para suas aplicações."
+      },
+      {
+        "title": "Redis",
+        "description": "Armazenamento em memória ultrarrápido para cache e gerenciamento de sessões."
+      },
+      {
+        "title": "MySQL",
+        "description": "Banco de dados SQL leve e versátil, ideal para aplicações web."
+      },
+      {
+        "title": "N8N",
+        "description": "Plataforma de automação de workflows com interface visual intuitiva."
+      },
+      {
+        "title": "WordPress",
+        "description": "CMS completo para criação de sites, blogs e landing pages."
+      },
+      {
+        "title": "Evolution API",
+        "description": "Backend para APIs com deploy rápido e escalabilidade automática."
+      }
+    ]
+  },
+  "advantages": {
+    "title": "Vantagens",
+    "subtitle": "Por que escolher o Zapflow MCP para suas necessidades de infraestrutura.",
+    "items": [
+      {
+        "title": "Sem complicações técnicas",
+        "description": "Esqueça configurações complexas. Apenas diga o que precisa e a IA cuida do resto."
+      },
+      {
+        "title": "Pronto para uso real",
+        "description": "Infraestrutura otimizada para performance e segurança em ambiente de produção."
+      },
+      {
+        "title": "IA no atendimento",
+        "description": "Atendimento 24/7 por IA que entende suas necessidades e resolve problemas rapidamente."
+      },
+      {
+        "title": "Preço justo e transparente",
+        "description": "Pague apenas pelo que usar, com cancelamento automático se não houver pagamento."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "O que nossos clientes dizem",
+    "items": [
+      {
+        "content": "Precisava de um banco Postgres urgente para um projeto. Em 5 minutos já estava com tudo funcionando. É quase mágico!",
+        "author": "Carlos Silva",
+        "role": "Desenvolvedor Full-Stack"
+      },
+      {
+        "content": "A facilidade de solicitar e receber acessos via WhatsApp é revolucionária. Economizei horas de configuração.",
+        "author": "Ana Martins",
+        "role": "DevOps Engineer"
+      },
+      {
+        "content": "Já testei vários serviços similares, mas a combinação de IA com provisão automática do Zapflow é imbatível.",
+        "author": "Roberto Almeida",
+        "role": "Tech Lead"
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Comece agora mesmo pelo WhatsApp",
+    "description": "Solicite sua aplicação e tenha acesso em minutos. Primeira hora gratuita para testar.",
+    "readyToStart": "Pronto para começar?",
+    "requestNow": "Solicite sua aplicação agora mesmo e teste por 1 hora gratuitamente."
+  },
+  "footer": {
+    "tagline": "Peça sua aplicação no WhatsApp. Use em minutos.",
+    "quickLinks": "Links Rápidos",
+    "privacy": "Política de Privacidade",
+    "applications": "Aplicações",
+    "contact": "Entre em Contato",
+    "contactDescription": "Estamos disponíveis 24/7 pelo WhatsApp para ajudar com qualquer dúvida.",
+    "copyright": "Todos os direitos reservados."
+  },
+  "pricing": {
+    "title": "Preços Mensais",
+    "subtitle": "Escolha a aplicação ideal para suas necessidades",
+    "freeHour": "1 hora grátis",
+    "freeHourDescription": "Todos os serviços incluem 1h gratuita para teste. Pagamento mensal recorrente. Cancelamento automático se não houver pagamento após 10 dias.",
+    "pricingHero": {
+      "title": "Preços Simples e Transparentes",
+      "subtitle": "Todas as aplicações incluem 1 hora gratuita para teste. Cobrança mensal recorrente."
+    }
+  },
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "items": [
+      {
+        "question": "Como funciona a cobrança?",
+        "answer": "Após o período gratuito de 1 hora, você será cobrado mensalmente. O pagamento é feito via Pix ou cartão de crédito."
+      },
+      {
+        "question": "Posso cancelar a qualquer momento?",
+        "answer": "Sim, você pode cancelar quando quiser pelo WhatsApp. Não há período mínimo de permanência ou multas por cancelamento."
+      },
+      {
+        "question": "O que acontece se eu não pagar?",
+        "answer": "Após 10 dias sem pagamento, o serviço é encerrado e os dados são apagados automaticamente."
+      },
+      {
+        "question": "Existe suporte técnico?",
+        "answer": "Sim, oferecemos suporte técnico via WhatsApp 24/7 através da nossa assistente de IA."
+      },
+      {
+        "question": "Posso solicitar aplicações customizadas?",
+        "answer": "Sim, além das aplicações padrão, podemos atender pedidos específicos. Preços e disponibilidade sob consulta."
+      },
+      {
+        "question": "Como recebo os acessos?",
+        "answer": "Você receberá as credenciais e URLs de acesso diretamente no WhatsApp assim que a aplicação estiver pronta."
+      }
+    ]
+  },
+  "theme": {
+    "switchToLight": "Mudar para modo claro",
+    "switchToDark": "Mudar para modo escuro"
+  },
+  "language": {
+    "selectLanguage": "Selecionar idioma"
+  }
+} 

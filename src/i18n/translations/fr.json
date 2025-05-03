@@ -1,0 +1,131 @@
+{
+  "nav": {
+    "overview": "Aperçu",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "about": "À propos"
+  },
+  "cta": {
+    "whatsapp": "Contacter sur WhatsApp",
+    "request": "Demander"
+  },
+  "hero": {
+    "badge": "Par IA, en temps réel",
+    "title": "Demandez votre application via WhatsApp. Utilisez-la en quelques minutes.",
+    "description": "Zapflow MCP fournit PostgreSQL, Redis, N8N et bien plus, à la demande via IA. Demandez, payez et utilisez."
+  },
+  "howItWorks": {
+    "title": "Comment Ça Marche",
+    "subtitle": "Notre processus est 100% automatisé et piloté par IA. Demandez, testez et utilisez en quelques minutes.",
+    "badge": "Processus simple",
+    "steps": [
+      {
+        "title": "Envoyez un message",
+        "description": "Dites-nous ce dont vous avez besoin via WhatsApp. Ex: 'Je veux une base de données Postgres pour mon projet'."
+      },
+      {
+        "title": "L'IA approvisionne",
+        "description": "Notre système traite votre demande, crée l'infrastructure et configure automatiquement."
+      },
+      {
+        "title": "Testez gratuitement",
+        "description": "Recevez les identifiants d'accès immédiatement et testez pendant 1 heure sans frais ni engagement."
+      },
+      {
+        "title": "Payez et utilisez",
+        "description": "Après approbation, effectuez le paiement et maintenez votre service actif mensuellement."
+      }
+    ]
+  },
+  "applications": {
+    "title": "Applications Disponibles",
+    "subtitle": "Une variété de services prêts à l'emploi, optimisés pour la performance et la sécurité.",
+    "items": [
+      {
+        "title": "PostgreSQL",
+        "description": "Base de données relationnelle robuste et fiable pour vos applications."
+      },
+      {
+        "title": "Redis",
+        "description": "Stockage en mémoire ultra-rapide pour le cache et la gestion des sessions."
+      },
+      {
+        "title": "MySQL",
+        "description": "Base de données SQL légère et polyvalente, idéale pour les applications web."
+      },
+      {
+        "title": "N8N",
+        "description": "Plateforme d'automatisation des flux de travail avec interface visuelle intuitive."
+      },
+      {
+        "title": "WordPress",
+        "description": "CMS complet pour créer des sites web, blogs et pages d'atterrissage."
+      },
+      {
+        "title": "Evolution API",
+        "description": "Backend pour APIs avec déploiement rapide et mise à l'échelle automatique."
+      }
+    ]
+  },
+  "advantages": {
+    "title": "Avantages",
+    "subtitle": "Pourquoi choisir Zapflow MCP pour vos besoins d'infrastructure.",
+    "items": [
+      {
+        "title": "Sans complications techniques",
+        "description": "Oubliez les configurations complexes. Dites simplement ce dont vous avez besoin et l'IA s'occupe du reste."
+      },
+      {
+        "title": "Prêt pour une utilisation réelle",
+        "description": "Infrastructure optimisée pour la performance et la sécurité en environnement de production."
+      },
+      {
+        "title": "IA au service client",
+        "description": "Service 24/7 par IA qui comprend vos besoins et résout rapidement les problèmes."
+      },
+      {
+        "title": "Prix juste et transparent",
+        "description": "Payez uniquement pour ce que vous utilisez, avec annulation automatique s'il n'y a pas de paiement."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Ce que disent nos clients",
+    "items": [
+      {
+        "content": "J'avais besoin d'une base de données Postgres en urgence pour un projet. En 5 minutes tout fonctionnait. C'est presque magique!",
+        "author": "Carlos Silva",
+        "role": "Développeur Full-Stack"
+      },
+      {
+        "content": "La facilité de demander et de recevoir des accès via WhatsApp est révolutionnaire. J'ai économisé des heures de configuration.",
+        "author": "Ana Martins",
+        "role": "Ingénieure DevOps"
+      },
+      {
+        "content": "J'ai essayé plusieurs services similaires, mais la combinaison de l'IA avec l'approvisionnement automatique de Zapflow est imbattable.",
+        "author": "Roberto Almeida",
+        "role": "Tech Lead"
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Commencez maintenant via WhatsApp",
+    "description": "Demandez votre application et obtenez l'accès en quelques minutes. Première heure gratuite pour tester."
+  },
+  "footer": {
+    "tagline": "Demandez votre application sur WhatsApp. Utilisez en quelques minutes.",
+    "quickLinks": "Liens Rapides",
+    "privacy": "Politique de Confidentialité",
+    "applications": "Applications",
+    "contact": "Contactez-nous",
+    "contactDescription": "Nous sommes disponibles 24/7 via WhatsApp pour vous aider avec toute question.",
+    "copyright": "Tous droits réservés."
+  },
+  "pricing": {
+    "title": "Prix Mensuels",
+    "subtitle": "Choisissez l'application idéale pour vos besoins",
+    "freeHour": "1 heure gratuite",
+    "freeHourDescription": "Tous les services incluent 1 heure gratuite pour tester. Paiement mensuel récurrent. Annulation automatique si pas de paiement après 10 jours."
+  }
+} 

@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+:root {
+  /* Light Theme (default) */
+  --background: #FFFFFF;
+  --foreground: #111111;
+  --muted: #888888;
+  --primary: #00C884;
+  --primary-dark: #00A870;
+  --primary-light: #00E098;
+  --secondary: #9E00D9;
+  --secondary-dark: #8A00BC;
+  --secondary-light: #BD00FF;
+  --accent: #0099CC;
+  --accent-dark: #0088B3;
+  --accent-light: #00AADD;
+  --border: rgba(0, 0, 0, 0.1);
+  --card-bg: #FCFCFC;
+  --card-border: rgba(0, 0, 0, 0.05);
+  --shadow: rgba(0, 0, 0, 0.05);
+  --shadow-hover: rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  /* Dark Theme */
+  --background: #0A0A0A;
+  --foreground: #FFFFFF;
+  --muted: #A0A0A0;
+  --primary: #00F5A0;
+  --primary-dark: #00D68A;
+  --primary-light: #00FFB9;
+  --secondary: #BD00FF;
+  --secondary-dark: #9900CC; 
+  --secondary-light: #D200FF;
+  --accent: #00BFFF;
+  --accent-dark: #0099CC;
+  --accent-light: #33D6FF;
+  --border: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: #0A0A0A;
+    --foreground: #FFFFFF;
+    --muted: #A0A0A0;
+    --primary: #00F5A0;
+    --primary-dark: #00D68A;
+    --primary-light: #00FFB9;
+    --secondary: #BD00FF;
+    --secondary-dark: #9900CC;
+    --secondary-light: #D200FF;
+    --accent: #00BFFF;
+    --accent-dark: #0099CC;
+    --accent-light: #33D6FF;
+    --border: rgba(255, 255, 255, 0.1);
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.05);
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 0, 0, 0.4);
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: -1;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.btn:hover::before {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--background);
+  box-shadow: 0 0 10px var(--primary-light);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 15px var(--primary);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: var(--foreground);
+  box-shadow: 0 0 10px var(--secondary-light);
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 0 15px var(--secondary);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--foreground);
+  color: var(--foreground);
+}
+
+.btn-outline:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.dark .btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px var(--shadow);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--shadow-hover);
+}
+
+.dark .card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(to right, var(--secondary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: inherit;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Parallax effect */
+.parallax {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease;
+}
+
+.parallax-slow {
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+}
+
+/* Grid patterns */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
