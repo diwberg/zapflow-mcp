@@ -8,7 +8,6 @@ import AppCard from '@/components/ui/AppCard';
 import FeatureCard from '@/components/ui/FeatureCard';
 import TestimonialCard from '@/components/ui/TestimonialCard';
 import DeviceMockup from '@/components/ui/DeviceMockup';
-import DarkModeTest from '@/components/ui/DarkModeTest';
 import { Zap, Cloud, Bot, CreditCard, ServerIcon, Database, Activity, Cpu } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -106,12 +105,6 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-[300px] bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
       </section>
       
-      {/* Dark Mode Test */}
-      <section className="py-10">
-        <div className="container">
-          <DarkModeTest />
-        </div>
-      </section>
       
       {/* How It Works - ID for anchor links */}
       <section className="py-20 relative" id="features">
