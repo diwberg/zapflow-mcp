@@ -5,49 +5,55 @@ import { useTranslation } from 'react-i18next';
 import SectionTitle from '@/components/ui/SectionTitle';
 import PricingTable from '@/components/ui/PricingTable';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
-import { PricingItem } from '@/components/ui/PricingTable';
+import { PricingItem, AdditionalInfo } from '@/components/ui/PricingTable';
+import pricingData from '@/data/pricing.json';
+
+// Loading skeleton component
+const PricingTableSkeleton = () => (
+  <div className="animate-pulse">
+    <div className="h-16 bg-background-light/20 dark:bg-background-dark/20 rounded-t-2xl mb-4"></div>
+    {[1, 2, 3, 4, 5, 6].map((i) => (
+      <div key={i} className="h-24 bg-background-light/10 dark:bg-background-dark/10 mb-2"></div>
+    ))}
+    <div className="h-20 bg-background-light/20 dark:bg-background-dark/20 rounded-b-2xl mt-4"></div>
+  </div>
+);
 
 export default function PricingPage() {
   const { t } = useTranslation();
   const [isMounted, setIsMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [pricingItems, setPricingItems] = useState<PricingItem[]>([]);
+  const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo | undefined>(undefined);
 
-  // Garantir que a renderização ocorra apenas no cliente
+  // Função para carregar dados de preço
+  const loadPricingData = async () => {
+    try {
+      // Simular carregamento de dados (pode ser removido se não for necessário)
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Mapear produtos do JSON para formato PricingItem
+      const items = pricingData.products.map(product => ({
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        features: product.features
+      }));
+      
+      setPricingItems(items);
+      setAdditionalInfo(pricingData.additionalInfo as AdditionalInfo);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Erro ao carregar dados de preços:', error);
+      setIsLoading(false);
+    }
+  };
+
+  // Garantir que a renderização e carregamento de dados ocorra apenas no cliente
   useEffect(() => {
     setIsMounted(true);
+    loadPricingData();
   }, []);
-
-  const pricingItems: PricingItem[] = [
-    {
-      name: t('applications.items.0.title'),
-      description: t('applications.items.0.description').split('.')[0],
-      price: 30,
-    },
-    {
-      name: t('applications.items.1.title'),
-      description: t('applications.items.1.description').split('.')[0],
-      price: 20,
-    },
-    {
-      name: t('applications.items.2.title'),
-      description: t('applications.items.2.description').split('.')[0],
-      price: 30,
-    },
-    {
-      name: t('applications.items.3.title'),
-      description: t('applications.items.3.description').split('.')[0],
-      price: 50,
-    },
-    {
-      name: t('applications.items.4.title'),
-      description: t('applications.items.4.description').split('.')[0],
-      price: 40,
-    },
-    {
-      name: t('applications.items.5.title'),
-      description: t('applications.items.5.description').split('.')[0],
-      price: 50,
-    },
-  ];
 
   if (!isMounted) {
     return null; // ou um skeleton/loader
@@ -68,7 +74,14 @@ export default function PricingPage() {
       {/* Pricing Table */}
       <section className="py-16">
         <div className="container">
-          <PricingTable items={pricingItems} />
+          {isLoading ? (
+            <PricingTableSkeleton />
+          ) : (
+            <PricingTable 
+              items={pricingItems} 
+              additionalInfo={additionalInfo}
+            />
+          )}
         </div>
       </section>
       

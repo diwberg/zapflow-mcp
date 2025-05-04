@@ -17,7 +17,7 @@ const Footer = () => {
               {t('footer.tagline')}
             </p>
             <a
-              href="https://wa.me/SEUNUMERO?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+              href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:text-primary-dark font-medium transition-colors"

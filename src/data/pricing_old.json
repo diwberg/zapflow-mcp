@@ -1,0 +1,81 @@
+{
+  "products": [
+    {
+      "id": "postgresql",
+      "name": "PostgreSQL",
+      "description": "Banco de dados relacional robusto e confiável para suas aplicações",
+      "price": 30,
+      "features": [
+        "Banco de dados PostgreSQL v14+",
+        "Backup automático diário",
+        "Acesso via CLI e interfaces web",
+        "Capacidade de armazenamento: 2GB"
+      ]
+    },
+    {
+      "id": "redis",
+      "name": "Redis",
+      "description": "Armazenamento em memória ultrarrápido para cache e gerenciamento de sessões",
+      "price": 20,
+      "features": [
+        "Servidor Redis 6+",
+        "Persistência configurável",
+        "Monitoramento em tempo real",
+        "Capacidade: 1GB de memória"
+      ]
+    },
+    {
+      "id": "mysql",
+      "name": "MySQL",
+      "description": "Banco de dados SQL leve e versátil, ideal para aplicações web",
+      "price": 30,
+      "features": [
+        "MySQL 8+",
+        "Backup automático diário",
+        "Interface de administração",
+        "Capacidade de armazenamento: 2GB"
+      ]
+    },
+    {
+      "id": "n8n",
+      "name": "N8N",
+      "description": "Plataforma de automação de workflows com interface visual intuitiva",
+      "price": 50,
+      "features": [
+        "N8N versão mais recente",
+        "Execuções ilimitadas",
+        "Suporte a APIs externas",
+        "Armazenamento de workflows: 1GB"
+      ]
+    },
+    {
+      "id": "wordpress",
+      "name": "WordPress",
+      "description": "CMS completo para criação de sites, blogs e landing pages",
+      "price": 40,
+      "features": [
+        "WordPress última versão",
+        "Banco de dados MySQL",
+        "5 plugins premium inclusos",
+        "Capacidade de armazenamento: 5GB"
+      ]
+    },
+    {
+      "id": "evolution-api",
+      "name": "Evolution API",
+      "description": "Backend para APIs com deploy rápido e escalabilidade automática",
+      "price": 50,
+      "features": [
+        "APIs RESTful",
+        "Suporte a WebSockets",
+        "Documentação automática",
+        "Capacidade de processamento: até 1000 req/min"
+      ]
+    }
+  ],
+  "additionalInfo": {
+    "freeTrialPeriod": "1 hora",
+    "billingCycle": "Mensal",
+    "cancellationPolicy": "Cancelamento automático se não houver pagamento após 5 dias"
+  }
+} 

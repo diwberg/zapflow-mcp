@@ -38,6 +38,6 @@ Este arquivo serve como registro de tarefas, decisões pendentes e contexto do p
 
 ## Notas Importantes
 
-- O número do WhatsApp está como placeholder "SEUNUMERO" e precisa ser substituído pelo número real
+- O número do WhatsApp está como placeholder "5511989773253" e precisa ser substituído pelo número real
 - O design segue diretrizes de cores inspiradas no WhatsApp para manter coerência com a proposta
 - A fonte Inter foi escolhida por sua boa legibilidade em diferentes tamanhos de tela 

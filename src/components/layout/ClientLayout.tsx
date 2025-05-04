@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import CookieBanner from '../ui/CookieBanner';
+import Analytics from '../marketing/Analytics';
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -24,6 +25,7 @@ const ClientLayout = ({ children }: ClientLayoutProps) => {
 
   return (
     <>
+      <Analytics />
       <Navbar />
       {children}
       <Footer />

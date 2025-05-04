@@ -87,7 +87,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
               </Link>
             ))}
             <motion.a 
-              href="https://wa.me/SEUNUMERO?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+              href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
@@ -122,7 +122,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
                 Peça sua aplicação no WhatsApp.<br />Use em minutos.
               </p>
               <motion.a
-                href="https://wa.me/SEUNUMERO?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+                href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline font-medium"
@@ -172,7 +172,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
               </p>
               <div className="flex space-x-4 mt-4">
                 <a 
-                  href="https://wa.me/SEUNUMERO"
+                  href="https://wa.me/5511989773253"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-foreground/70 hover:text-primary transition-colors"

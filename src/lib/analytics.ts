@@ -259,6 +259,19 @@ export const trackWhatsAppClick = (source: string): void => {
 export const trackHomePageView = (): void => {
   trackPageView('/');
   trackEvent('view_home_page', 'page_view');
+  
+  // Add explicit Meta Pixel tracking for homepage
+  if (isMetaEnabled && typeof window !== 'undefined' && window.fbq) {
+    // Trigger standard PageView event again to ensure it's captured
+    window.fbq('track', 'PageView');
+    
+    // Also track as ViewContent event for better ad optimization
+    window.fbq('track', 'ViewContent', {
+      content_name: 'Home Page',
+      content_category: 'Landing Page',
+      content_type: 'website'
+    });
+  }
 };
 
 // Track pricing page view
