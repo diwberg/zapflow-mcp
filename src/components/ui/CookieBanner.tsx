@@ -5,6 +5,15 @@ import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import { X } from 'lucide-react';
 
+// Função auxiliar para salvar o consentimento e disparar um evento
+const saveConsent = (value: string) => {
+  localStorage.setItem('cookie-consent', value);
+  
+  // Disparar um evento para que outros componentes saibam da mudança
+  const event = new Event('consentUpdated');
+  window.dispatchEvent(event);
+};
+
 export default function CookieBanner() {
   const { t } = useTranslation();
   const [isMounted, setIsMounted] = useState(false);
@@ -12,33 +21,33 @@ export default function CookieBanner() {
 
   useEffect(() => {
     setIsMounted(true);
-    // For testing - force banner to show
-    setIsVisible(true);
     
-    // Comment out original logic for testing
-    /*
-    const cookieConsent = localStorage.getItem('cookie-consent');
-    if (!cookieConsent) {
-      // Atraso para evitar que o banner apareça imediatamente durante o carregamento da página
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, 1000);
-      return () => clearTimeout(timer);
+    // Verificar se já temos consentimento de cookies
+    if (typeof window !== 'undefined') {
+      const cookieConsent = localStorage.getItem('cookie-consent');
+      if (!cookieConsent) {
+        // Atraso para evitar que o banner apareça imediatamente durante o carregamento da página
+        const timer = setTimeout(() => {
+          setIsVisible(true);
+        }, 1000);
+        return () => clearTimeout(timer);
+      }
     }
-    */
   }, []);
 
   const acceptAll = () => {
-    localStorage.setItem('cookie-consent', 'all');
+    saveConsent('all');
     setIsVisible(false);
   };
 
   const acceptEssential = () => {
-    localStorage.setItem('cookie-consent', 'essential');
+    saveConsent('essential');
     setIsVisible(false);
   };
 
   const close = () => {
+    // Também salva preferência ao fechar, considerando apenas cookies essenciais
+    saveConsent('essential');
     setIsVisible(false);
   };
 

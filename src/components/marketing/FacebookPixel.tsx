@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // Add fbq to the window object with proper typing
 declare global {
@@ -41,19 +41,57 @@ export const trackHomePageView = () => {
 const FacebookPixel = () => {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
   const pathname = usePathname();
+  const [hasConsent, setHasConsent] = useState(false);
 
   useEffect(() => {
-    if (pixelId && pathname) {
+    if (typeof window === 'undefined') return;
+    
+    // Verificar o consentimento inicial
+    const checkConsent = () => {
+      const cookieConsent = localStorage.getItem('cookie-consent');
+      setHasConsent(cookieConsent === 'all');
+    };
+    
+    // Verificar agora
+    checkConsent();
+    
+    // Adicionar listeners para atualizações de consentimento
+    const handleConsentUpdated = () => {
+      checkConsent();
+    };
+    
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'cookie-consent') {
+        checkConsent();
+      }
+    };
+    
+    // Adicionar os listeners
+    window.addEventListener('consentUpdated', handleConsentUpdated);
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('consentUpdated', handleConsentUpdated);
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !pixelId || !pathname || !hasConsent) return;
+    
+    // Pequeno atraso para garantir que o script do Facebook está carregado
+    setTimeout(() => {
       pageview();
       
       // Track specific page views
       if (pathname === '/') {
         trackHomePageView();
       }
-    }
-  }, [pathname, pixelId]);
+    }, 300);
+  }, [pathname, pixelId, hasConsent]);
 
-  if (!pixelId) {
+  // Não carregar o script se não tiver o ID do pixel ou se o usuário não aceitou cookies
+  if (!pixelId || !hasConsent) {
     return null;
   }
 
@@ -78,8 +116,34 @@ const FacebookPixel = () => {
 // NoScript component (to be used in the body)
 export const FacebookPixelNoScript = () => {
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  const [hasConsent, setHasConsent] = useState(false);
+  
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    // Verificar o consentimento inicial
+    const checkConsent = () => {
+      const cookieConsent = localStorage.getItem('cookie-consent');
+      setHasConsent(cookieConsent === 'all');
+    };
+    
+    // Verificar agora
+    checkConsent();
+    
+    // Adicionar listeners para atualizações de consentimento
+    const handleConsentUpdated = () => {
+      checkConsent();
+    };
+    
+    window.addEventListener('consentUpdated', handleConsentUpdated);
+    
+    return () => {
+      window.removeEventListener('consentUpdated', handleConsentUpdated);
+    };
+  }, []);
 
-  if (!pixelId) {
+  // Não mostrar se não tiver ID de pixel ou se o usuário não aceitou cookies
+  if (!pixelId || !hasConsent) {
     return null;
   }
 
