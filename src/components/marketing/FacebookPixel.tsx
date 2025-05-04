@@ -16,6 +16,9 @@ declare global {
 export const pageview = () => {
   if (window.fbq) {
     window.fbq('track', 'PageView');
+    console.log('FacebookPixel: PageView event triggered');
+  } else {
+    console.error('FacebookPixel: fbq not available when trying to track PageView');
   }
 };
 
@@ -23,6 +26,9 @@ export const pageview = () => {
 export const event = (name: string, options = {}) => {
   if (window.fbq) {
     window.fbq('track', name, options);
+    console.log(`FacebookPixel: ${name} event triggered`, options);
+  } else {
+    console.error(`FacebookPixel: fbq not available when trying to track ${name}`);
   }
 };
 
@@ -34,6 +40,9 @@ export const trackHomePageView = () => {
       content_category: 'Landing Page',
       content_type: 'website'
     });
+    console.log('FacebookPixel: ViewContent event triggered for homepage');
+  } else {
+    console.error('FacebookPixel: fbq not available when trying to track ViewContent');
   }
 };
 
@@ -46,9 +55,12 @@ const FacebookPixel = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
+    console.log('FacebookPixel: Component mounted, pixel ID:', pixelId);
+    
     // Verificar o consentimento inicial
     const checkConsent = () => {
       const cookieConsent = localStorage.getItem('cookie-consent');
+      console.log('FacebookPixel: Cookie consent value:', cookieConsent);
       setHasConsent(cookieConsent === 'all');
     };
     
@@ -57,11 +69,13 @@ const FacebookPixel = () => {
     
     // Adicionar listeners para atualizações de consentimento
     const handleConsentUpdated = () => {
+      console.log('FacebookPixel: Consent updated event received');
       checkConsent();
     };
     
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'cookie-consent') {
+        console.log('FacebookPixel: Storage change event for cookie-consent:', e.newValue);
         checkConsent();
       }
     };
@@ -74,13 +88,24 @@ const FacebookPixel = () => {
       window.removeEventListener('consentUpdated', handleConsentUpdated);
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, []);
+  }, [pixelId]);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !pixelId || !pathname || !hasConsent) return;
+    if (typeof window === 'undefined' || !pixelId || !pathname || !hasConsent) {
+      console.log('FacebookPixel: Not tracking due to:', {
+        windowUndefined: typeof window === 'undefined',
+        pixelIdMissing: !pixelId,
+        pathnameMissing: !pathname,
+        noConsent: !hasConsent
+      });
+      return;
+    }
+    
+    console.log('FacebookPixel: Ready to track with consent and pixel ID');
     
     // Pequeno atraso para garantir que o script do Facebook está carregado
     setTimeout(() => {
+      console.log('FacebookPixel: Triggering events after delay');
       pageview();
       
       // Track specific page views
@@ -92,11 +117,17 @@ const FacebookPixel = () => {
 
   // Não carregar o script se não tiver o ID do pixel ou se o usuário não aceitou cookies
   if (!pixelId || !hasConsent) {
+    console.log('FacebookPixel: Script not loaded because:', {
+      pixelIdMissing: !pixelId, 
+      noConsent: !hasConsent
+    });
     return null;
   }
 
+  console.log('FacebookPixel: Loading script with pixel ID:', pixelId);
+
   return (
-    <Script id="facebook-pixel" strategy="afterInteractive">
+    <Script id="facebook-pixel" strategy="afterInteractive" onLoad={() => console.log('FacebookPixel: Script loaded successfully')} onError={() => console.error('FacebookPixel: Script failed to load')}>
       {`
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -106,6 +137,7 @@ const FacebookPixel = () => {
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
+        console.log('FacebookPixel: Initializing with pixel ID: ${pixelId}');
         fbq('init', '${pixelId}');
         fbq('track', 'PageView');
       `}
