@@ -6,6 +6,7 @@ import SectionTitle from '@/components/ui/SectionTitle';
 import PricingTable from '@/components/ui/PricingTable';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import { PricingItem, AdditionalInfo } from '@/components/ui/PricingTable';
+import { fetchProducts } from '@/services/productService';
 import pricingData from '@/data/pricing.json';
 
 // Loading skeleton component
@@ -34,27 +35,39 @@ export default function PricingPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [pricingItems, setPricingItems] = useState<PricingItem[]>([]);
   const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo | undefined>(undefined);
+  const [error, setError] = useState<string | null>(null);
 
   // Função para carregar dados de preço
   const loadPricingData = async () => {
     try {
-      // Simular carregamento de dados (pode ser removido se não for necessário)
-      await new Promise(resolve => setTimeout(resolve, 300));
+      setIsLoading(true);
+      setError(null);
       
-      // Mapear produtos do JSON para formato PricingItem
-      const items = (pricingData.products as Product[]).map(product => ({
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        features: product.features,
-        requires: product.requires
-      }));
+      // Tentar carregar produtos da API
+      const products = await fetchProducts();
       
-      setPricingItems(items);
+      if (products.length > 0) {
+        // Se conseguiu carregar da API, use esses dados
+        setPricingItems(products);
+      } else {
+        // Caso contrário, use o fallback local
+        console.warn('Sem produtos da API, usando dados locais');
+        const items = (pricingData.products as Product[]).map(product => ({
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          features: product.features,
+          requires: product.requires
+        }));
+        setPricingItems(items);
+      }
+      
+      // Informações adicionais sempre do arquivo local
       setAdditionalInfo(pricingData.additionalInfo as AdditionalInfo);
       setIsLoading(false);
     } catch (error) {
       console.error('Erro ao carregar dados de preços:', error);
+      setError('Não foi possível carregar os produtos. Tente novamente mais tarde.');
       setIsLoading(false);
     }
   };
@@ -86,6 +99,16 @@ export default function PricingPage() {
         <div className="container">
           {isLoading ? (
             <PricingTableSkeleton />
+          ) : error ? (
+            <div className="text-center p-6 bg-red-500/10 rounded-lg">
+              <p className="text-red-500">{error}</p>
+              <button 
+                onClick={loadPricingData}
+                className="mt-3 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90"
+              >
+                Tentar novamente
+              </button>
+            </div>
           ) : (
             <PricingTable 
               items={pricingItems} 
