@@ -11,6 +11,7 @@ export interface PricingItem {
   description: string;
   price: number;
   features?: string[];
+  requires?: string[];
 }
 
 export interface AdditionalInfo {
@@ -31,11 +32,11 @@ const PricingTable = ({ items, className = '', additionalInfo }: PricingTablePro
   
   // Filtered items based on search term
   const filteredItems = items.filter(item => {
-    const searchLower = searchTerm.toLowerCase();
+    const searchValue = searchTerm.toLowerCase();
     return (
-      item.name.toLowerCase().includes(searchLower) || 
-      item.description.toLowerCase().includes(searchLower) ||
-      item.features?.some(feature => feature.toLowerCase().includes(searchLower))
+      item.name.toLowerCase().includes(searchValue) ||
+      item.description.toLowerCase().includes(searchValue) ||
+      item.features?.some(feature => feature.toLowerCase().includes(searchValue))
     );
   });
 
@@ -84,6 +85,26 @@ const PricingTable = ({ items, className = '', additionalInfo }: PricingTablePro
       transition: { duration: 0.5, delay: 0.6 }
     }
   };
+
+  // Mapeamento dos IDs de produtos para nomes
+  const getProductNameById = (id: string): string => {
+    const product = items.find(item => 
+      item.name.toLowerCase() === id || 
+      item.name.toLowerCase().replace(/\s+/g, '-') === id ||
+      item.name.toLowerCase().replace(/\s+/g, '') === id
+    );
+    return product ? product.name : id.charAt(0).toUpperCase() + id.slice(1);
+  };
+
+  // Renderizar um único badge de requisito
+  const renderRequireBadge = (req: string, index: number) => (
+    <span 
+      key={index} 
+      className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
+    >
+      {getProductNameById(req)}
+    </span>
+  );
 
   return (
     <div className={`${className}`}>

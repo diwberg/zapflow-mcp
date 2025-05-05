@@ -19,6 +19,15 @@ const PricingTableSkeleton = () => (
   </div>
 );
 
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  features?: string[];
+  requires?: string[];
+}
+
 export default function PricingPage() {
   const { t } = useTranslation();
   const [isMounted, setIsMounted] = useState(false);
@@ -33,11 +42,12 @@ export default function PricingPage() {
       await new Promise(resolve => setTimeout(resolve, 300));
       
       // Mapear produtos do JSON para formato PricingItem
-      const items = pricingData.products.map(product => ({
+      const items = (pricingData.products as Product[]).map(product => ({
         name: product.name,
         description: product.description,
         price: product.price,
-        features: product.features
+        features: product.features,
+        requires: product.requires
       }));
       
       setPricingItems(items);

@@ -10,7 +10,8 @@
           "Backup automático diário",
           "Acesso via CLI e interfaces web",
           "Capacidade de armazenamento: 2GB"
-        ]
+        ],
+        "requires": []
       },
       {
         "id": "redis",
@@ -22,7 +23,8 @@
           "Persistência configurável",
           "Monitoramento em tempo real",
           "Capacidade: 1GB de memória"
-        ]
+        ],
+        "requires": []
       },
       {
         "id": "mysql",
@@ -34,7 +36,8 @@
           "Backup automático diário",
           "Interface de administração",
           "Capacidade de armazenamento: 2GB"
-        ]
+        ],
+        "requires": []
       },
       {
         "id": "n8n",
@@ -46,7 +49,8 @@
           "Execuções ilimitadas",
           "Suporte a APIs externas",
           "Armazenamento de workflows: 1GB"
-        ]
+        ],
+        "requires": ["postgresql", "redis"]
       },
       {
         "id": "wordpress",
@@ -58,7 +62,8 @@
           "Banco de dados MySQL",
           "5 plugins premium inclusos",
           "Capacidade de armazenamento: 5GB"
-        ]
+        ],
+        "requires": ["mysql"]
       },
       {
         "id": "evolution-api",
@@ -70,7 +75,8 @@
           "Suporte a WebSockets",
           "Documentação automática",
           "Capacidade de processamento: até 1000 req/min"
-        ]
+        ],
+        "requires": ["redis", "postgresql"]
       },
       {
         "id": "mongodb",
@@ -82,7 +88,8 @@
           "Alta performance para grandes volumes de dados",
           "Acesso via Mongo Compass e CLI",
           "Capacidade de armazenamento: 2GB"
-        ]
+        ],
+        "requires": []
       },
       {
         "id": "supabase",
@@ -94,7 +101,8 @@
           "Autenticação e regras de acesso",
           "Armazenamento e APIs em tempo real",
           "Dashboard de administração incluso"
-        ]
+        ],
+        "requires": ["postgresql"]
       },
       {
         "id": "calcom",
@@ -106,7 +114,8 @@
           "Links públicos de agendamento",
           "Notificações automáticas",
           "Interface personalizável"
-        ]
+        ],
+        "requires": ["postgresql"]
       },
       {
         "id": "grafana",
@@ -118,7 +127,8 @@
           "Integração com Prometheus, Loki, InfluxDB",
           "Alertas em tempo real",
           "Suporte a múltiplas fontes de dados"
-        ]
+        ],
+        "requires": []
       },
       {
         "id": "baserow",
@@ -130,7 +140,8 @@
           "Permissões por usuário",
           "Importação/exportação de dados",
           "Interface intuitiva via web"
-        ]
+        ],
+        "requires": ["postgresql"]
       },
       {
         "id": "uptimekuma",
@@ -142,7 +153,8 @@
           "Alertas por email e Telegram",
           "Histórico de disponibilidade",
           "Interface de fácil configuração"
-        ]
+        ],
+        "requires": []
       },
       {
         "id": "odoo",
@@ -154,7 +166,8 @@
           "Dashboard personalizável",
           "Suporte a múltiplos usuários",
           "Aplicações web e mobile"
-        ]
+        ],
+        "requires": ["postgresql"]
       },
       {
         "id": "appsmith",
@@ -166,7 +179,8 @@
           "Conexão com APIs e bancos de dados",
           "Controle de acesso por função",
           "Deploy automatizado"
-        ]
+        ],
+        "requires": ["postgresql", "mongodb"]
       },
       {
         "id": "excalidraw",
@@ -178,7 +192,8 @@
           "Colaboração em tempo real",
           "Exportação em SVG e PNG",
           "Integração com drives externos"
-        ]
+        ],
+        "requires": []
       },
       {
         "id": "phpmyadmin",
@@ -190,7 +205,8 @@
           "Execução de queries SQL",
           "Importação/exportação de dados",
           "Compatível com MySQL 8+"
-        ]
+        ],
+        "requires": ["mysql"]
       },
       {
         "id": "minio",
@@ -202,7 +218,8 @@
           "Alta performance e escalabilidade",
           "Interface de administração web",
           "Criptografia de dados em repouso"
-        ]
+        ],
+        "requires": []
       },
       {
         "id": "metabase",
@@ -214,7 +231,8 @@
           "Consultas SQL e construtor visual",
           "Alertas por e-mail",
           "Conexão com múltiplos bancos"
-        ]
+        ],
+        "requires": ["postgresql", "mysql"]
       },
       {
         "id": "typebot",
@@ -226,7 +244,8 @@
           "Integração com APIs e webhooks",
           "Publicação via iframe ou link",
           "Suporte a múltiplos idiomas"
-        ]
+        ],
+        "requires": ["postgresql"]
       },
       {
         "id": "portainer",
@@ -238,7 +257,8 @@
           "Suporte a Docker Swarm e Kubernetes",
           "Interface web moderna",
           "Acesso com controle de permissões"
-        ]
+        ],
+        "requires": []
       },
       {
         "id": "nextcloud",
@@ -250,7 +270,8 @@
           "Sincronização entre dispositivos",
           "Aplicativos integrados (calendar, notes, contacts)",
           "Capacidade de armazenamento: 5GB"
-        ]
+        ],
+        "requires": ["mysql", "redis"]
       },
       {
         "id": "chatwoot",
@@ -262,7 +283,8 @@
           "Automação e tags inteligentes",
           "Suporte a múltiplos agentes",
           "Relatórios de atendimento"
-        ]
+        ],
+        "requires": ["postgresql", "redis"]
       },
       {
         "id": "langflow",
@@ -274,7 +296,8 @@
           "Integração com OpenAI, Hugging Face e outros",
           "Execução local ou remota",
           "Histórico de execuções"
-        ]
+        ],
+        "requires": ["redis"]
       },
       {
         "id": "pgadmin",
@@ -286,7 +309,8 @@
           "Execução de scripts SQL",
           "Exportação de dados",
           "Interface amigável via navegador"
-        ]
+        ],
+        "requires": ["postgresql"]
       },
       {
         "id": "botpress",
@@ -298,7 +322,8 @@
           "Processamento de linguagem natural (NLP)",
           "Logs e analytics integrados",
           "Deploy via cloud ou local"
-        ]
+        ],
+        "requires": ["postgresql", "redis"]
       },
       {
         "id": "qdrant",
@@ -310,7 +335,8 @@
           "Integração com embeddings OpenAI",
           "API RESTful",
           "Armazenamento otimizado para vetores"
-        ]
+        ],
+        "requires": []
       }
     ],
     "additionalInfo": {
