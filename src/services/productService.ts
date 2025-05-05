@@ -10,6 +10,23 @@ interface BaserowFeature {
 }
 
 /**
+ * Representa uma opção de pré-requisito no Baserow
+ */
+interface BaserowPrerequisite {
+  id: number;
+  value: string;
+  color: string;
+}
+
+/**
+ * Representa um registro de pedido no Baserow
+ */
+interface BaserowOrder {
+  id: number;
+  value: string;
+}
+
+/**
  * Representa um produto no formato do Baserow
  * Os nomes dos campos seguem a estrutura field_XX conforme definido no Baserow
  */
@@ -21,8 +38,9 @@ interface BaserowProduct {
   field_78: boolean; // Ativo
   field_79: string;  // Preço
   field_80: BaserowFeature[]; // Features
-  field_85: string[] | number[]; // Requisitos (IDs)
-  field_86: unknown[];    // Outros campos
+  field_81: string;  // ID_STRIPE
+  field_85: BaserowOrder[];   // Pedidos (link para outra tabela)
+  field_86: BaserowPrerequisite[]; // Pré-requisitos
 }
 
 /**
@@ -36,17 +54,40 @@ interface BaserowResponse {
 }
 
 /**
+ * Interface estendida para PricingItem incluindo informações de cores
+ */
+interface ExtendedPricingItem extends PricingItem {
+  featureColors?: {[key: string]: string};
+  requireColors?: {[key: string]: string};
+}
+
+/**
  * Busca produtos da API do Baserow e converte para o formato do PricingTable
  * 
  * @returns Lista de produtos no formato PricingItem
  */
 export async function fetchProducts(): Promise<PricingItem[]> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_PRODUCTS_URL;
-    const apiKey = process.env.APIKEY_BASEROW || "Token Rk5lB2S02fKuK3rZFoNJQqzIgRJU3BSR";
+    const apiUrl = process.env.NEXT_PUBLIC_PRODUCTS_URL
+    let apiKey = process.env.NEXT_PUBLIC_APIKEY_BASEROW
+    
+    console.log('Fetching products from:', apiUrl);
+    
+    // Limpar aspas no token
+    if (apiKey) {
+      apiKey = apiKey.replace(/"/g, '');
+    }
+    
+    console.log('API Key configured:', apiKey ? 'Sim (primeiro caractere: ' + apiKey.charAt(0) + ')' : 'Não');
     
     if (!apiUrl) {
+      console.error('API URL não configurada');
       throw new Error('API URL não configurada');
+    }
+    
+    if (!apiKey) {
+      console.error('API Key não configurada');
+      throw new Error('API Key não configurada');
     }
     
     const response = await fetch(apiUrl, {
@@ -56,48 +97,47 @@ export async function fetchProducts(): Promise<PricingItem[]> {
     });
     
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Erro ao buscar produtos: ${response.status}`, errorText);
       throw new Error(`Erro ao buscar produtos: ${response.status}`);
     }
     
     const data: BaserowResponse = await response.json();
+    console.log('Produtos carregados:', data.count, 'resultados');
     
     // Passo 1: Extrair todos os produtos e criar uma lista completa
-    // Isso é necessário para poder mapear os IDs de requisitos para os nomes de produtos
-    const allProducts = data.results
+    // Isso é necessário para poder mapear os valores de pré-requisitos para os nomes de produtos
+    const extendedProducts: ExtendedPricingItem[] = data.results
       .filter(product => product.field_78) // Apenas produtos ativos
       .map(product => ({
-        id: product.id,
+        id: product.id, // Adicionamos o ID para referência
         name: product.field_76,
         description: product.field_77,
-        price: Number(product.field_79),
+        price: Number(product.field_79.replace('R$', '').trim()),
         features: product.field_80.map(feature => feature.value),
-        requires: product.field_85 || []
+        featureColors: product.field_80.reduce((colors, feature) => {
+          colors[feature.value] = feature.color;
+          return colors;
+        }, {} as {[key: string]: string}),
+        requires: product.field_86?.map(prereq => prereq.value) || [],
+        requireColors: product.field_86?.reduce((colors, prereq) => {
+          colors[prereq.value] = prereq.color;
+          return colors;
+        }, {} as {[key: string]: string}) || {}
       }));
     
-    // Passo 2: Função para converter um ID de produto em um slug (usado para requisitos)
-    // Os requisitos vêm como IDs numéricos, mas a aplicação espera strings representando slugs
-    const getProductSlugById = (id: number | string): string => {
-      const product = allProducts.find(p => p.id === Number(id));
-      if (product) {
-        // Criar um slug baseado no nome do produto
-        return product.name.toLowerCase().replace(/\s+/g, '-');
-      }
-      return String(id);
-    };
+    console.log('Produtos processados:', extendedProducts.length);
     
-    // Passo 3: Mapear os produtos finais, convertendo os IDs de requisitos para slugs
-    return allProducts.map(product => ({
+    // Passo 2: Converter para o formato PricingItem (removendo propriedades extras)
+    return extendedProducts.map(product => ({
       name: product.name,
       description: product.description,
       price: product.price,
       features: product.features,
-      // Converter IDs numéricos para slugs de produto
-      requires: Array.isArray(product.requires) 
-        ? product.requires.map(id => getProductSlugById(id))
-        : []
+      requires: product.requires
     }));
   } catch (error) {
     console.error('Erro ao buscar produtos:', error);
-    return [];
+    throw new Error('Falha ao carregar produtos. Por favor, tente novamente mais tarde.');
   }
 } 

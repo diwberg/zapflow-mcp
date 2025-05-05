@@ -35,14 +35,16 @@ export default function PricingPage() {
 
   // Função para carregar dados de preço
   const loadPricingData = async () => {
+    console.log("Iniciando carregamento de produtos...");
     try {
       setIsLoading(true);
       setError(null);
       
       // Carregar produtos da API
       const products = await fetchProducts();
+      console.log("Produtos recebidos:", products?.length || 0);
       
-      if (products.length > 0) {
+      if (products && products.length > 0) {
         setPricingItems(products);
       } else {
         setError('Nenhum produto ativo encontrado. Tente novamente mais tarde.');
@@ -51,7 +53,7 @@ export default function PricingPage() {
       setIsLoading(false);
     } catch (error) {
       console.error('Erro ao carregar dados de preços:', error);
-      setError('Não foi possível carregar os produtos. Tente novamente mais tarde.');
+      setError(error instanceof Error ? error.message : 'Não foi possível carregar os produtos. Tente novamente mais tarde.');
       setIsLoading(false);
     }
   };
@@ -169,6 +171,7 @@ export default function PricingPage() {
             className="bg-background text-primary hover:bg-background/90 text-lg"
             variant="outline"
             size="lg"
+            message="Olá! Gostaria de conhecer melhor as opções de aplicações do Zapflow MCP."
           />
         </div>
       </section>

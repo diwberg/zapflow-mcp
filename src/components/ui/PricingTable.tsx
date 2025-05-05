@@ -7,6 +7,7 @@ import { CheckIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 export interface PricingItem {
+  id?: number; // ID opcional para referência interna
   name: string;
   description: string;
   price: number;
@@ -25,6 +26,98 @@ interface PricingTableProps {
   className?: string;
   additionalInfo?: AdditionalInfo;
 }
+
+// Mapeamento de cores do Baserow para classes Tailwind
+const colorMap: Record<string, string> = {
+  'blue': 'bg-blue-500',
+  'light-blue': 'bg-blue-300',
+  'dark-blue': 'bg-blue-700',
+  'darker-blue': 'bg-blue-900',
+  'green': 'bg-green-500',
+  'light-green': 'bg-green-300',
+  'dark-green': 'bg-green-700',
+  'darker-green': 'bg-green-900',
+  'deep-dark-green': 'bg-emerald-800',
+  'red': 'bg-red-500',
+  'light-red': 'bg-red-300',
+  'dark-red': 'bg-red-700',
+  'darker-red': 'bg-red-900',
+  'orange': 'bg-orange-500',
+  'light-orange': 'bg-orange-300',
+  'dark-orange': 'bg-orange-700',
+  'darker-orange': 'bg-orange-900',
+  'deep-dark-orange': 'bg-amber-800',
+  'yellow': 'bg-yellow-500',
+  'light-yellow': 'bg-yellow-300',
+  'dark-yellow': 'bg-yellow-700',
+  'darker-yellow': 'bg-yellow-900',
+  'purple': 'bg-purple-500',
+  'light-purple': 'bg-purple-300',
+  'dark-purple': 'bg-purple-700',
+  'darker-purple': 'bg-purple-900',
+  'pink': 'bg-pink-500',
+  'light-pink': 'bg-pink-300',
+  'dark-pink': 'bg-pink-700',
+  'darker-pink': 'bg-pink-900',
+  'gray': 'bg-gray-500',
+  'light-gray': 'bg-gray-300',
+  'dark-gray': 'bg-gray-700',
+  'brown': 'bg-amber-700',
+  'dark-brown': 'bg-amber-800',
+  'darker-brown': 'bg-amber-900',
+  'cyan': 'bg-cyan-500',
+  'light-cyan': 'bg-cyan-300',
+  'dark-cyan': 'bg-cyan-700',
+  'darker-cyan': 'bg-cyan-900',
+  // Fallback para cores não mapeadas
+  'default': 'bg-primary/10'
+};
+
+// Mapeamento de cores do Baserow para classes de texto Tailwind
+const textColorMap: Record<string, string> = {
+  'blue': 'text-white',
+  'light-blue': 'text-gray-800',
+  'dark-blue': 'text-white',
+  'darker-blue': 'text-white',
+  'green': 'text-white',
+  'light-green': 'text-gray-800',
+  'dark-green': 'text-white',
+  'darker-green': 'text-white',
+  'deep-dark-green': 'text-white',
+  'red': 'text-white',
+  'light-red': 'text-gray-800',
+  'dark-red': 'text-white',
+  'darker-red': 'text-white',
+  'orange': 'text-white',
+  'light-orange': 'text-gray-800',
+  'dark-orange': 'text-white',
+  'darker-orange': 'text-white',
+  'deep-dark-orange': 'text-white',
+  'yellow': 'text-gray-800',
+  'light-yellow': 'text-gray-800',
+  'dark-yellow': 'text-white',
+  'darker-yellow': 'text-white',
+  'purple': 'text-white',
+  'light-purple': 'text-gray-800',
+  'dark-purple': 'text-white',
+  'darker-purple': 'text-white',
+  'pink': 'text-white',
+  'light-pink': 'text-gray-800',
+  'dark-pink': 'text-white',
+  'darker-pink': 'text-white',
+  'gray': 'text-white',
+  'light-gray': 'text-gray-800',
+  'dark-gray': 'text-white',
+  'brown': 'text-white',
+  'dark-brown': 'text-white',
+  'darker-brown': 'text-white',
+  'cyan': 'text-white',
+  'light-cyan': 'text-gray-800',
+  'dark-cyan': 'text-white',
+  'darker-cyan': 'text-white',
+  // Fallback para cores não mapeadas
+  'default': 'text-primary'
+};
 
 const PricingTable = ({ items, className = '', additionalInfo }: PricingTableProps) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -86,39 +179,41 @@ const PricingTable = ({ items, className = '', additionalInfo }: PricingTablePro
     }
   };
 
-  // Mapeamento dos IDs/slugs de produtos para nomes
-  const getProductNameBySlug = (slug: string): string => {
-    // Primeiro tenta encontrar um produto com o nome exato convertido em slug
-    const product = items.find(item => 
-      item.name.toLowerCase().replace(/\s+/g, '-') === slug
+  // Renderizar um único badge de requisito
+  const renderRequireBadge = (req: string, index: number) => {
+    // Determinar classe de cor para o badge
+    let bgColorClass = 'bg-gradient-to-r from-green-400 to-teal-600';
+    let textColorClass = 'text-white';
+    
+    // Aplicar cores do mapeamento
+    if (req in colorMap) {
+      bgColorClass = colorMap[req] || colorMap['default'];
+      textColorClass = textColorMap[req] || textColorMap['default'];
+    }
+    
+    return (
+      <span 
+        key={index} 
+        className={`inline-flex items-center rounded-full ${bgColorClass} px-2.5 py-0.5 text-xs font-medium ${textColorClass}`}
+      >
+        {formatProductName(req)}
+      </span>
     );
+  };
+  
+  // Formatar nome do produto para exibição
+  const formatProductName = (value: string): string => {
+    // Verificar se já é um nome legível
+    if (!/^[a-z0-9-]+$/.test(value)) {
+      return value; // Já é um nome legível
+    }
     
-    if (product) return product.name;
-    
-    // Se não encontrar, tenta fazer um match parcial
-    const partialMatch = items.find(item => 
-      slug.includes(item.name.toLowerCase().replace(/\s+/g, '-')) ||
-      item.name.toLowerCase().replace(/\s+/g, '-').includes(slug)
-    );
-    
-    if (partialMatch) return partialMatch.name;
-    
-    // Caso não encontre, formata o slug para exibição
-    return slug
+    // Converter slug para nome legível
+    return value
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   };
-
-  // Renderizar um único badge de requisito
-  const renderRequireBadge = (req: string, index: number) => (
-    <span 
-      key={index} 
-      className="inline-flex bg-gradient-to-r from-green-400 to-teal-600 items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
-    >
-      {getProductNameBySlug(req)}
-    </span>
-  );
 
   return (
     <div className={`${className}`}>
@@ -225,6 +320,7 @@ const PricingTable = ({ items, className = '', additionalInfo }: PricingTablePro
                         className="py-2 px-4 text-sm"
                         variant="primary"
                         source={`pricing-${item.name}`}
+                        message={`Olá! Gostaria de solicitar a aplicação ${item.name}.`}
                       />
                     </div>
                   </motion.div>

@@ -13,6 +13,7 @@ interface WhatsAppButtonProps {
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   source?: string;
+  message?: string;
 }
 
 const WhatsAppButton = ({
@@ -22,6 +23,7 @@ const WhatsAppButton = ({
   variant = 'primary',
   size = 'md',
   source,
+  message,
 }: WhatsAppButtonProps) => {
   const { t } = useTranslation();
   const pathname = usePathname();
@@ -42,6 +44,12 @@ const WhatsAppButton = ({
 
   // Generate source if not provided
   const trackingSource = source || pathname || 'unknown';
+  
+  // Default message if none provided
+  const whatsappMessage = message || "Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP.";
+  
+  // Create WhatsApp URL with encoded message
+  const whatsappUrl = `https://wa.me/5511989773253?text=${encodeURIComponent(whatsappMessage.replace(/%20/g, ' '))}`;
 
   const handleClick = (e: React.MouseEvent) => {
     // Garante que o evento só é disparado após a hidratação
@@ -59,7 +67,7 @@ const WhatsAppButton = ({
       e.preventDefault();
       setTimeout(() => {
         window.open(
-          "https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP.",
+          whatsappUrl,
           "_blank",
           "noopener,noreferrer"
         );
@@ -71,7 +79,7 @@ const WhatsAppButton = ({
   if (!isMounted) {
     return (
       <a
-        href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         className={`btn ${variant === 'primary' ? 'btn-primary' : variant === 'secondary' ? 'btn-secondary' : 'btn-outline'} ${
@@ -106,7 +114,7 @@ const WhatsAppButton = ({
 
   return (
     <motion.a
-      href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+      href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={buttonClasses}
