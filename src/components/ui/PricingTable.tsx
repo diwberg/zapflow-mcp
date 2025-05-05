@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import WhatsAppButton from './WhatsAppButton';
-import { CheckIcon } from '@heroicons/react/24/solid';
+import { CheckIcon, ArrowRightIcon } from '@heroicons/react/24/solid';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 export interface PricingItem {
@@ -86,23 +86,37 @@ const PricingTable = ({ items, className = '', additionalInfo }: PricingTablePro
     }
   };
 
-  // Mapeamento dos IDs de produtos para nomes
-  const getProductNameById = (id: string): string => {
+  // Mapeamento dos IDs/slugs de produtos para nomes
+  const getProductNameBySlug = (slug: string): string => {
+    // Primeiro tenta encontrar um produto com o nome exato convertido em slug
     const product = items.find(item => 
-      item.name.toLowerCase() === id || 
-      item.name.toLowerCase().replace(/\s+/g, '-') === id ||
-      item.name.toLowerCase().replace(/\s+/g, '') === id
+      item.name.toLowerCase().replace(/\s+/g, '-') === slug
     );
-    return product ? product.name : id.charAt(0).toUpperCase() + id.slice(1);
+    
+    if (product) return product.name;
+    
+    // Se não encontrar, tenta fazer um match parcial
+    const partialMatch = items.find(item => 
+      slug.includes(item.name.toLowerCase().replace(/\s+/g, '-')) ||
+      item.name.toLowerCase().replace(/\s+/g, '-').includes(slug)
+    );
+    
+    if (partialMatch) return partialMatch.name;
+    
+    // Caso não encontre, formata o slug para exibição
+    return slug
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
 
   // Renderizar um único badge de requisito
   const renderRequireBadge = (req: string, index: number) => (
     <span 
       key={index} 
-      className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
+      className="inline-flex bg-gradient-to-r from-green-400 to-teal-600 items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
     >
-      {getProductNameById(req)}
+      {getProductNameBySlug(req)}
     </span>
   );
 
@@ -189,6 +203,17 @@ const PricingTable = ({ items, className = '', additionalInfo }: PricingTablePro
                           ))}
                         </div>
                       )}
+                      
+                      {/* Requirement badges */}
+                      {item.requires && item.requires.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <span className="text-xs text-foreground/60 flex items-center">
+                            <ArrowRightIcon className="w-3 h-3 mr-1" />
+                            Requer:
+                          </span>
+                          {item.requires.map((req, i) => renderRequireBadge(req, i))}
+                        </div>
+                      )}
                     </div>
                     
                     <div className="md:col-span-1 flex items-center justify-between w-full">
@@ -196,7 +221,7 @@ const PricingTable = ({ items, className = '', additionalInfo }: PricingTablePro
                         R$ {item.price}
                       </div>
                       <WhatsAppButton 
-                        text="Solicitar"
+                        text={`Solicitar ${item.name}`}
                         className="py-2 px-4 text-sm"
                         variant="primary"
                         source={`pricing-${item.name}`}

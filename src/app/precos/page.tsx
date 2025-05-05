@@ -7,7 +7,6 @@ import PricingTable from '@/components/ui/PricingTable';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import { PricingItem, AdditionalInfo } from '@/components/ui/PricingTable';
 import { fetchProducts } from '@/services/productService';
-import pricingData from '@/data/pricing.json';
 
 // Loading skeleton component
 const PricingTableSkeleton = () => (
@@ -20,21 +19,18 @@ const PricingTableSkeleton = () => (
   </div>
 );
 
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  features?: string[];
-  requires?: string[];
-}
+// Informações adicionais estáticas
+const additionalInfoData: AdditionalInfo = {
+  freeTrialPeriod: "1 hora",
+  billingCycle: "Mensal",
+  cancellationPolicy: "Cancelamento automático se não houver pagamento após 5 dias"
+};
 
 export default function PricingPage() {
   const { t } = useTranslation();
   const [isMounted, setIsMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [pricingItems, setPricingItems] = useState<PricingItem[]>([]);
-  const [additionalInfo, setAdditionalInfo] = useState<AdditionalInfo | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
 
   // Função para carregar dados de preço
@@ -43,27 +39,15 @@ export default function PricingPage() {
       setIsLoading(true);
       setError(null);
       
-      // Tentar carregar produtos da API
+      // Carregar produtos da API
       const products = await fetchProducts();
       
       if (products.length > 0) {
-        // Se conseguiu carregar da API, use esses dados
         setPricingItems(products);
       } else {
-        // Caso contrário, use o fallback local
-        console.warn('Sem produtos da API, usando dados locais');
-        const items = (pricingData.products as Product[]).map(product => ({
-          name: product.name,
-          description: product.description,
-          price: product.price,
-          features: product.features,
-          requires: product.requires
-        }));
-        setPricingItems(items);
+        setError('Nenhum produto ativo encontrado. Tente novamente mais tarde.');
       }
       
-      // Informações adicionais sempre do arquivo local
-      setAdditionalInfo(pricingData.additionalInfo as AdditionalInfo);
       setIsLoading(false);
     } catch (error) {
       console.error('Erro ao carregar dados de preços:', error);
@@ -112,7 +96,7 @@ export default function PricingPage() {
           ) : (
             <PricingTable 
               items={pricingItems} 
-              additionalInfo={additionalInfo}
+              additionalInfo={additionalInfoData}
             />
           )}
         </div>
