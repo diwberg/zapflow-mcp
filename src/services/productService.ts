@@ -68,8 +68,10 @@ interface ExtendedPricingItem extends PricingItem {
  */
 export async function fetchProducts(): Promise<PricingItem[]> {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_PRODUCTS_URL
-    let apiKey = process.env.NEXT_PUBLIC_APIKEY_BASEROW
+    // Usar variável de ambiente ou fallback para a URL da API
+    const apiUrl = process.env.NEXT_PUBLIC_PRODUCTS_URL || "https://baserow.icyou.com.br/api/database/rows/table/13/";
+    // Tentar obter a chave API de ambas as variáveis possíveis para compatibilidade
+    let apiKey = process.env.NEXT_PUBLIC_APIKEY_BASEROW || process.env.APIKEY_BASEROW || "Token Rk5lB2S02fKuK3rZFoNJQqzIgRJU3BSR";
     
     console.log('Fetching products from:', apiUrl);
     
@@ -99,7 +101,20 @@ export async function fetchProducts(): Promise<PricingItem[]> {
     if (!response.ok) {
       const errorText = await response.text();
       console.error(`Erro ao buscar produtos: ${response.status}`, errorText);
-      throw new Error(`Erro ao buscar produtos: ${response.status}`);
+      
+      if (response.status === 401) {
+        throw new Error('Erro de autenticação: verifique o token da API');
+      } else if (response.status === 403) {
+        throw new Error('Acesso proibido: sem permissão para acessar a API');
+      } else if (response.status === 404) {
+        throw new Error('URL da API não encontrada');
+      } else if (response.status === 429) {
+        throw new Error('Limite de requisições excedido. Tente novamente mais tarde');
+      } else if (response.status >= 500) {
+        throw new Error('Erro no servidor da API. Tente novamente mais tarde');
+      } else {
+        throw new Error(`Erro ao buscar produtos: ${response.status}`);
+      }
     }
     
     const data: BaserowResponse = await response.json();
