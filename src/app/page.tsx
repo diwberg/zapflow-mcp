@@ -11,10 +11,14 @@ import DeviceMockup from '@/components/ui/DeviceMockup';
 import { Zap, Cloud, Bot, CreditCard, ServerIcon, Database, Activity, Cpu } from 'lucide-react';
 import { useRef, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { fetchProducts } from '@/services/productService';
+import { PricingItem } from '@/components/ui/PricingTable';
 
 export default function Home() {
   const { t } = useTranslation();
   const [isMounted, setIsMounted] = useState(false);
+  const [products, setProducts] = useState<PricingItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -26,9 +30,25 @@ export default function Home() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  // Garantir que a renderização ocorra apenas no cliente
+  // Carrega produtos da API
+  const loadProducts = async () => {
+    try {
+      setIsLoading(true);
+      const data = await fetchProducts();
+      if (data && data.length > 0) {
+        setProducts(data);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Erro ao carregar produtos:', error);
+      setIsLoading(false);
+    }
+  };
+
+  // Garantir que a renderização e carregamento de dados ocorra apenas no cliente
   useEffect(() => {
     setIsMounted(true);
+    loadProducts();
   }, []);
 
   if (!isMounted) {
@@ -157,53 +177,109 @@ export default function Home() {
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
-            <AppCard 
-              title={t('applications.items.0.title')}
-              description={t('applications.items.0.description')}
-              icon={<Database className="text-primary" size={32} />}
-              price={30}
-              showButton
-            />
-            
-            <AppCard 
-              title={t('applications.items.1.title')}
-              description={t('applications.items.1.description')}
-              icon={<Activity className="text-primary" size={32} />}
-              price={20}
-              showButton
-            />
-            
-            <AppCard 
-              title={t('applications.items.2.title')}
-              description={t('applications.items.2.description')}
-              icon={<Database className="text-primary" size={32} />}
-              price={30}
-              showButton
-            />
-            
-            <AppCard 
-              title={t('applications.items.3.title')}
-              description={t('applications.items.3.description')}
-              icon={<Activity className="text-primary" size={32} />}
-              price={50}
-              showButton
-            />
-            
-            <AppCard 
-              title={t('applications.items.4.title')}
-              description={t('applications.items.4.description')}
-              icon={<ServerIcon className="text-primary" size={32} />}
-              price={40}
-              showButton
-            />
-            
-            <AppCard 
-              title={t('applications.items.5.title')}
-              description={t('applications.items.5.description')}
-              icon={<Cpu className="text-primary" size={32} />}
-              price={50}
-              showButton
-            />
+            {isLoading ? (
+              // Skeleton loading state
+              <>
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="card p-6 relative overflow-hidden">
+                      <div className="flex items-start my-4">
+                        <div className="w-12 h-12 bg-background/80 rounded-lg border border-primary/20 flex-shrink-0 mr-4"></div>
+                        <div className="flex-1">
+                          <div className="h-5 bg-background-light/20 dark:bg-background-dark/20 rounded-lg w-3/4 mb-2"></div>
+                          <div className="h-4 bg-background-light/10 dark:bg-background-dark/10 rounded-lg w-full"></div>
+                        </div>
+                        <div className="ml-4 flex-shrink-0 w-16 h-8 bg-background-light/10 dark:bg-background-dark/10 rounded-lg"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                {products.slice(0, 6).map((product, index) => {
+                  // Determine which icon to use based on product type/name
+                  let IconComponent = Database;
+                  
+                  if (product.name.toLowerCase().includes('monitor') || product.name.toLowerCase().includes('kuma')) {
+                    IconComponent = Activity;
+                  } else if (product.name.toLowerCase().includes('server') || product.name.toLowerCase().includes('api')) {
+                    IconComponent = ServerIcon;
+                  } else if (product.name.toLowerCase().includes('bot') || product.name.toLowerCase().includes('chat')) {
+                    IconComponent = Bot;
+                  } else if (product.name.toLowerCase().includes('cloud') || product.name.toLowerCase().includes('minio')) {
+                    IconComponent = Cloud;
+                  } else if (product.name.toLowerCase().includes('cpu') || product.name.toLowerCase().includes('process')) {
+                    IconComponent = Cpu;
+                  }
+                  
+                  return (
+                    <AppCard 
+                      key={index}
+                      title={product.name}
+                      description={product.description}
+                      icon={<IconComponent className="text-primary" size={32} />}
+                      price={product.price}
+                      showButton
+                      buttonText={`Solicitar ${product.name}`}
+                    />
+                  );
+                })}
+                
+                {products.length === 0 && !isLoading && (
+                  // Fallback for when products can't be loaded
+                  <>
+                    <AppCard 
+                      title={t('applications.items.0.title')}
+                      description={t('applications.items.0.description')}
+                      icon={<Database className="text-primary" size={32} />}
+                      price={30}
+                      showButton
+                    />
+                    
+                    <AppCard 
+                      title={t('applications.items.1.title')}
+                      description={t('applications.items.1.description')}
+                      icon={<Activity className="text-primary" size={32} />}
+                      price={20}
+                      showButton
+                    />
+                    
+                    <AppCard 
+                      title={t('applications.items.2.title')}
+                      description={t('applications.items.2.description')}
+                      icon={<Database className="text-primary" size={32} />}
+                      price={30}
+                      showButton
+                    />
+                    
+                    <AppCard 
+                      title={t('applications.items.3.title')}
+                      description={t('applications.items.3.description')}
+                      icon={<Activity className="text-primary" size={32} />}
+                      price={50}
+                      showButton
+                    />
+                    
+                    <AppCard 
+                      title={t('applications.items.4.title')}
+                      description={t('applications.items.4.description')}
+                      icon={<ServerIcon className="text-primary" size={32} />}
+                      price={40}
+                      showButton
+                    />
+                    
+                    <AppCard 
+                      title={t('applications.items.5.title')}
+                      description={t('applications.items.5.description')}
+                      icon={<Cpu className="text-primary" size={32} />}
+                      price={50}
+                      showButton
+                    />
+                  </>
+                )}
+              </>
+            )}
           </div>
         </div>
       </section>

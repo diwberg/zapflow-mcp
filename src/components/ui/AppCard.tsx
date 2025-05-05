@@ -11,6 +11,7 @@ export interface AppCardProps {
   className?: string;
   showButton?: boolean;
   buttonText?: string;
+  message?: string;
 }
 
 const AppCard = ({ 
@@ -20,7 +21,8 @@ const AppCard = ({
   price,
   className = '',
   showButton = false,
-  buttonText = 'Solicitar'
+  buttonText = 'Solicitar',
+  message
 }: AppCardProps) => {
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -132,7 +134,11 @@ const AppCard = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <WhatsAppButton text={buttonText} className="text-sm py-2" />
+          <WhatsAppButton 
+            text={buttonText} 
+            className="text-sm py-2" 
+            message={message}
+          />
         </motion.div>
       )}
       
