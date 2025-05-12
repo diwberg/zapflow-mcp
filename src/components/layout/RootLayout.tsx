@@ -63,7 +63,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       >
         <div className="container flex justify-between items-center">
           <Link href="/" className="font-bold text-2xl text-foreground relative">
-            <span className="text-gradient">Zapflow MCP</span>
+            <span className="text-gradient">Zapflow</span>
             <motion.div 
               className="absolute -bottom-1 left-0 w-full h-[2px] bg-primary"
               initial={{ width: 0 }}
@@ -87,7 +87,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
               </Link>
             ))}
             <motion.a 
-              href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+              href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20deploy."
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
@@ -117,12 +117,12 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="font-bold text-xl text-foreground mb-4">Zapflow MCP</h3>
+              <h3 className="font-bold text-xl text-foreground mb-4">Zapflow</h3>
               <p className="text-foreground/70 mb-4">
                 Peça sua aplicação no WhatsApp.<br />Use em minutos.
               </p>
               <motion.a
-                href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+                href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%deploy."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline font-medium"
@@ -186,7 +186,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
           </div>
           
           <div className="border-t border-white/10 mt-10 pt-8 text-center text-foreground/50">
-            <p>&copy; {new Date().getFullYear()} Zapflow MCP. Todos os direitos reservados.</p>
+            <p>&copy; {new Date().getFullYear()} Zapflow. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>

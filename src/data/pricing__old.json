@@ -1,0 +1,348 @@
+{
+    "products": [
+      {
+        "id": "postgresql",
+        "name": "PostgreSQL",
+        "description": "Banco de dados relacional robusto e confiável para suas aplicações",
+        "price": 35,
+        "features": [
+          "Banco de dados PostgreSQL v14+",
+          "Backup automático diário",
+          "Acesso via CLI e interfaces web",
+          "Capacidade de armazenamento: 2GB"
+        ],
+        "requires": []
+      },
+      {
+        "id": "redis",
+        "name": "Redis",
+        "description": "Armazenamento em memória ultrarrápido para cache e gerenciamento de sessões",
+        "price": 25,
+        "features": [
+          "Servidor Redis 6+",
+          "Persistência configurável",
+          "Monitoramento em tempo real",
+          "Capacidade: 1GB de memória"
+        ],
+        "requires": []
+      },
+      {
+        "id": "mysql",
+        "name": "MySQL",
+        "description": "Banco de dados SQL leve e versátil, ideal para aplicações web",
+        "price": 30,
+        "features": [
+          "MySQL 8+",
+          "Backup automático diário",
+          "Interface de administração",
+          "Capacidade de armazenamento: 2GB"
+        ],
+        "requires": []
+      },
+      {
+        "id": "n8n",
+        "name": "N8N",
+        "description": "Plataforma de automação de workflows com interface visual intuitiva",
+        "price": 90,
+        "features": [
+          "N8N versão mais recente",
+          "Execuções ilimitadas",
+          "Suporte a APIs externas",
+          "Armazenamento de workflows: 1GB"
+        ],
+        "requires": ["postgresql", "redis"]
+      },
+      {
+        "id": "wordpress",
+        "name": "WordPress",
+        "description": "CMS completo para criação de sites, blogs e landing pages",
+        "price": 40,
+        "features": [
+          "WordPress última versão",
+          "Banco de dados MySQL",
+          "5 plugins premium inclusos",
+          "Capacidade de armazenamento: 5GB"
+        ],
+        "requires": ["mysql"]
+      },
+      {
+        "id": "evolution-api",
+        "name": "Evolution API",
+        "description": "Backend para APIs com deploy rápido e escalabilidade automática",
+        "price": 50,
+        "features": [
+          "APIs RESTful",
+          "Suporte a WebSockets",
+          "Documentação automática",
+          "Capacidade de processamento: até 1000 req/min"
+        ],
+        "requires": ["redis", "postgresql"]
+      },
+      {
+        "id": "mongodb",
+        "name": "MongoDB",
+        "description": "Banco de dados NoSQL flexível, ideal para dados semi-estruturados",
+        "price": 35,
+        "features": [
+          "MongoDB v6+",
+          "Alta performance para grandes volumes de dados",
+          "Acesso via Mongo Compass e CLI",
+          "Capacidade de armazenamento: 2GB"
+        ],
+        "requires": []
+      },
+      {
+        "id": "supabase",
+        "name": "Supabase",
+        "description": "Alternativa open-source ao Firebase, com banco de dados e autenticação",
+        "price": 90,
+        "features": [
+          "Banco PostgreSQL integrado",
+          "Autenticação e regras de acesso",
+          "Armazenamento e APIs em tempo real",
+          "Dashboard de administração incluso"
+        ],
+        "requires": ["postgresql"]
+      },
+      {
+        "id": "calcom",
+        "name": "Cal.com",
+        "description": "Agenda online para marcação de compromissos e reuniões",
+        "price": 40,
+        "features": [
+          "Integração com Google e Outlook",
+          "Links públicos de agendamento",
+          "Notificações automáticas",
+          "Interface personalizável"
+        ],
+        "requires": ["postgresql"]
+      },
+      {
+        "id": "grafana",
+        "name": "Grafana",
+        "description": "Plataforma de visualização de dados e métricas em tempo real",
+        "price": 30,
+        "features": [
+          "Dashboards customizáveis",
+          "Integração com Prometheus, Loki, InfluxDB",
+          "Alertas em tempo real",
+          "Suporte a múltiplas fontes de dados"
+        ],
+        "requires": []
+      },
+      {
+        "id": "baserow",
+        "name": "Baserow",
+        "description": "Banco de dados visual estilo Airtable para colaboração em equipe",
+        "price": 40,
+        "features": [
+          "Criação de tabelas visuais",
+          "Permissões por usuário",
+          "Importação/exportação de dados",
+          "Interface intuitiva via web"
+        ],
+        "requires": ["postgresql"]
+      },
+      {
+        "id": "uptimekuma",
+        "name": "UptimeKuma",
+        "description": "Monitoramento de disponibilidade de serviços e aplicações",
+        "price": 20,
+        "features": [
+          "Verificação de uptime em tempo real",
+          "Alertas por email e Telegram",
+          "Histórico de disponibilidade",
+          "Interface de fácil configuração"
+        ],
+        "requires": []
+      },
+      {
+        "id": "odoo",
+        "name": "Odoo",
+        "description": "ERP completo com módulos de CRM, vendas, estoque e finanças",
+        "price": 80,
+        "features": [
+          "Módulos integrados para gestão empresarial",
+          "Dashboard personalizável",
+          "Suporte a múltiplos usuários",
+          "Aplicações web e mobile"
+        ],
+        "requires": ["postgresql"]
+      },
+      {
+        "id": "appsmith",
+        "name": "Appsmith",
+        "description": "Plataforma para criação rápida de aplicações internas com UI visual",
+        "price": 50,
+        "features": [
+          "Editor de UI drag-and-drop",
+          "Conexão com APIs e bancos de dados",
+          "Controle de acesso por função",
+          "Deploy automatizado"
+        ],
+        "requires": ["postgresql", "mongodb"]
+      },
+      {
+        "id": "excalidraw",
+        "name": "Excalidraw",
+        "description": "Ferramenta de desenho colaborativo com estilo feito à mão",
+        "price": 10,
+        "features": [
+          "Editor visual intuitivo",
+          "Colaboração em tempo real",
+          "Exportação em SVG e PNG",
+          "Integração com drives externos"
+        ],
+        "requires": []
+      },
+      {
+        "id": "phpmyadmin",
+        "name": "phpMyAdmin",
+        "description": "Interface web para administração de bancos MySQL e MariaDB",
+        "price": 10,
+        "features": [
+          "Gerenciamento visual de banco de dados",
+          "Execução de queries SQL",
+          "Importação/exportação de dados",
+          "Compatível com MySQL 8+"
+        ],
+        "requires": ["mysql"]
+      },
+      {
+        "id": "minio",
+        "name": "MinIO",
+        "description": "Armazenamento de objetos compatível com S3, ideal para arquivos",
+        "price": 35,
+        "features": [
+          "Compatibilidade com API S3",
+          "Alta performance e escalabilidade",
+          "Interface de administração web",
+          "Criptografia de dados em repouso"
+        ],
+        "requires": []
+      },
+      {
+        "id": "metabase",
+        "name": "Metabase",
+        "description": "Plataforma de BI para análise e visualização de dados de forma simples",
+        "price": 40,
+        "features": [
+          "Dashboards interativos",
+          "Consultas SQL e construtor visual",
+          "Alertas por e-mail",
+          "Conexão com múltiplos bancos"
+        ],
+        "requires": ["postgresql", "mysql"]
+      },
+      {
+        "id": "typebot",
+        "name": "Typebot",
+        "description": "Construtor de chatbots conversacionais com editor visual",
+        "price": 30,
+        "features": [
+          "Editor no-code de fluxos",
+          "Integração com APIs e webhooks",
+          "Publicação via iframe ou link",
+          "Suporte a múltiplos idiomas"
+        ],
+        "requires": ["postgresql"]
+      },
+      {
+        "id": "portainer",
+        "name": "Portainer",
+        "description": "Gerenciador de containers Docker com painel intuitivo",
+        "price": 20,
+        "features": [
+          "Gerenciamento de stacks e volumes",
+          "Suporte a Docker Swarm e Kubernetes",
+          "Interface web moderna",
+          "Acesso com controle de permissões"
+        ],
+        "requires": []
+      },
+      {
+        "id": "nextcloud",
+        "name": "Nextcloud",
+        "description": "Alternativa open-source ao Google Drive com foco em privacidade",
+        "price": 50,
+        "features": [
+          "Armazenamento e compartilhamento de arquivos",
+          "Sincronização entre dispositivos",
+          "Aplicativos integrados (calendar, notes, contacts)",
+          "Capacidade de armazenamento: 5GB"
+        ],
+        "requires": ["mysql", "redis"]
+      },
+      {
+        "id": "chatwoot",
+        "name": "Chatwoot",
+        "description": "Plataforma de atendimento omnichannel com suporte a WhatsApp, Instagram e outros",
+        "price": 70,
+        "features": [
+          "Painel unificado de conversas",
+          "Automação e tags inteligentes",
+          "Suporte a múltiplos agentes",
+          "Relatórios de atendimento"
+        ],
+        "requires": ["postgresql", "redis"]
+      },
+      {
+        "id": "langflow",
+        "name": "Langflow",
+        "description": "Interface visual para criação de fluxos com modelos LLM (Large Language Models)",
+        "price": 45,
+        "features": [
+          "Editor de fluxos com blocos arrastáveis",
+          "Integração com OpenAI, Hugging Face e outros",
+          "Execução local ou remota",
+          "Histórico de execuções"
+        ],
+        "requires": ["redis"]
+      },
+      {
+        "id": "pgadmin",
+        "name": "pgAdmin",
+        "description": "Interface gráfica para administração de bancos PostgreSQL",
+        "price": 15,
+        "features": [
+          "Gerenciamento completo de objetos PostgreSQL",
+          "Execução de scripts SQL",
+          "Exportação de dados",
+          "Interface amigável via navegador"
+        ],
+        "requires": ["postgresql"]
+      },
+      {
+        "id": "botpress",
+        "name": "Botpress",
+        "description": "Plataforma open-source para criação de chatbots inteligentes",
+        "price": 50,
+        "features": [
+          "Editor visual de fluxos",
+          "Processamento de linguagem natural (NLP)",
+          "Logs e analytics integrados",
+          "Deploy via cloud ou local"
+        ],
+        "requires": ["postgresql", "redis"]
+      },
+      {
+        "id": "qdrant",
+        "name": "Qdrant",
+        "description": "Banco de dados vetorial para busca semântica e IA generativa",
+        "price": 50,
+        "features": [
+          "Busca vetorial com alta performance",
+          "Integração com embeddings OpenAI",
+          "API RESTful",
+          "Armazenamento otimizado para vetores"
+        ],
+        "requires": []
+      }
+    ],
+    "additionalInfo": {
+      "freeTrialPeriod": "1 hora",
+      "billingCycle": "Mensal",
+      "cancellationPolicy": "Cancelamento automático se não houver pagamento após 5 dias"
+    }
+  }
+  

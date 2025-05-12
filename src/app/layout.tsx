@@ -13,8 +13,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Zapflow MCP | Peça sua aplicação no WhatsApp",
-  description: "Zapflow MCP provisiona Postgres, Redis, N8N e muito mais. Tudo via IA, em tempo real.",
+  title: "Zapflow | Peça sua aplicação no WhatsApp",
+  description: "Zapflow deploy provisiona Postgres, Redis, N8N e muito mais. Tudo via IA, em tempo real.",
 };
 
 export default function RootLayout({

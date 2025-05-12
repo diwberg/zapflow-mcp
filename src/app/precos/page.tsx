@@ -171,7 +171,7 @@ export default function PricingPage() {
             className="bg-background text-primary hover:bg-background/90 text-lg"
             variant="outline"
             size="lg"
-            message="Olá! Gostaria de conhecer melhor as opções de aplicações do Zapflow MCP."
+            message="Olá! Gostaria de conhecer melhor as opções de aplicações do Zapflow deploy."
           />
         </div>
       </section>

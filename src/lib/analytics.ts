@@ -1,4 +1,4 @@
-// Analytics service for ZapFlow MCP
+// Analytics service for ZapFlow
 // Handles Google Analytics, Meta Pixel and Google Tag Manager
 
 // Types

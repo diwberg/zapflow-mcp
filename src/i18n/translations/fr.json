@@ -12,7 +12,7 @@
   "hero": {
     "badge": "Par IA, en temps réel",
     "title": "Demandez votre application via WhatsApp. Utilisez-la en quelques minutes.",
-    "description": "Zapflow MCP fournit PostgreSQL, Redis, N8N et bien plus, à la demande via IA. Demandez, payez et utilisez."
+    "description": "Zapflow fournit PostgreSQL, Redis, N8N et bien plus, à la demande via IA. Demandez, payez et utilisez."
   },
   "howItWorks": {
     "title": "Comment Ça Marche",
@@ -69,7 +69,7 @@
   },
   "advantages": {
     "title": "Avantages",
-    "subtitle": "Pourquoi choisir Zapflow MCP pour vos besoins d'infrastructure.",
+    "subtitle": "Pourquoi choisir Zapflow pour vos besoins d'infrastructure.",
     "items": [
       {
         "title": "Sans complications techniques",

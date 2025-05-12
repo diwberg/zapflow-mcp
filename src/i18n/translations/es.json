@@ -15,7 +15,7 @@
   "hero": {
     "badge": "Por IA, en tiempo real",
     "title": "Solicita tu aplicación por WhatsApp. Úsala en minutos.",
-    "description": "Zapflow MCP entrega PostgreSQL, Redis, N8N y mucho más, bajo demanda vía IA. Solicita, paga y utiliza."
+    "description": "Zapflow entrega PostgreSQL, Redis, N8N y mucho más, bajo demanda vía IA. Solicita, paga y utiliza."
   },
   "howItWorks": {
     "title": "Cómo Funciona",
@@ -72,7 +72,7 @@
   },
   "advantages": {
     "title": "Ventajas",
-    "subtitle": "Por qué elegir Zapflow MCP para tus necesidades de infraestructura.",
+    "subtitle": "Por qué elegir Zapflow para tus necesidades de infraestructura.",
     "items": [
       {
         "title": "Sin complicaciones técnicas",
@@ -187,7 +187,7 @@
     "lastUpdated": "Última actualización:",
     "introduction": {
       "title": "Introducción",
-      "content": "Zapflow MCP está comprometido a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos tu información personal cuando utilizas nuestro sitio web y servicios."
+      "content": "Zapflow está comprometido a proteger tu privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos y protegemos tu información personal cuando utilizas nuestro sitio web y servicios."
     },
     "informationCollected": {
       "title": "Información que recopilamos",
@@ -227,11 +227,11 @@
     "lastUpdated": "Última actualización:",
     "introduction": {
       "title": "Introducción",
-      "content": "Bienvenido a Zapflow MCP. Estos Términos de Uso rigen tu acceso y uso de nuestro sitio web y servicios. Al acceder o utilizar nuestros servicios, aceptas quedar vinculado a estos términos."
+      "content": "Bienvenido a Zapflow. Estos Términos de Uso rigen tu acceso y uso de nuestro sitio web y servicios. Al acceder o utilizar nuestros servicios, aceptas quedar vinculado a estos términos."
     },
     "serviceDescription": {
       "title": "Descripción del servicio",
-      "content": "Zapflow MCP proporciona servicios de aprovisionamiento de aplicaciones bajo demanda vía WhatsApp, con infraestructura automatizada."
+      "content": "Zapflow proporciona servicios de aprovisionamiento de aplicaciones bajo demanda vía WhatsApp, con infraestructura automatizada."
     },
     "userAccounts": {
       "title": "Cuentas de usuario",
@@ -247,11 +247,11 @@
     },
     "intellectualProperty": {
       "title": "Propiedad intelectual",
-      "content": "Todo el contenido y software disponible a través de nuestros servicios son propiedad de Zapflow MCP o de sus licenciantes y están protegidos por leyes de propiedad intelectual."
+      "content": "Todo el contenido y software disponible a través de nuestros servicios son propiedad de Zapflow o de sus licenciantes y están protegidos por leyes de propiedad intelectual."
     },
     "limitation": {
       "title": "Limitación de responsabilidad",
-      "content": "En ningún caso Zapflow MCP será responsable por daños indirectos, incidentales, especiales o consecuentes resultantes del uso de nuestros servicios."
+      "content": "En ningún caso Zapflow será responsable por daños indirectos, incidentales, especiales o consecuentes resultantes del uso de nuestros servicios."
     },
     "termination": {
       "title": "Terminación",

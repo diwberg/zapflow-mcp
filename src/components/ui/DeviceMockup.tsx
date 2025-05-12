@@ -114,7 +114,7 @@ const DeviceMockup = ({
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-accent/20 to-primary/10 flex items-center justify-center">
-                    <span className="text-gradient font-bold text-4xl">Zapflow MCP</span>
+                    <span className="text-gradient font-bold text-4xl">Zapflow</span>
                   </div>
                 )}
               </div>

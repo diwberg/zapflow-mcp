@@ -37,8 +37,8 @@ const Navbar = () => {
     <nav className="bg-background/80 backdrop-blur-md border-b border-border py-4 sticky top-0 z-50 transition-colors duration-300">
       <div className="container flex justify-between items-center">
         <Link href="/" className="font-bold text-xl flex items-center text-gradient-primary hover:opacity-90 transition-opacity">
-          <Image src="/logo.png" alt="Zapflow MCP" width={80} height={30} className="mr-2" />
-          Zapflow MCP
+          <Image src="/logo.png" alt="Zapflow" width={80} height={30} className="mr-2" />
+          Zapflow
         </Link>
         
         {/* Desktop Navigation */}
@@ -57,7 +57,7 @@ const Navbar = () => {
           </div>
           
           <a 
-            href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+            href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%deploy."
             target="_blank"
             rel="noopener noreferrer" 
             className="btn-primary py-2 px-4 rounded-2xl"
@@ -99,7 +99,7 @@ const Navbar = () => {
               {safeT('nav.pricing')}
             </Link>
             <a 
-              href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+              href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%deploy."
               target="_blank"
               rel="noopener noreferrer" 
               className="btn-primary py-2 px-4 text-center"

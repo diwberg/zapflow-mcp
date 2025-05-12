@@ -46,7 +46,7 @@ const WhatsAppButton = ({
   const trackingSource = source || pathname || 'unknown';
   
   // Default message if none provided
-  const whatsappMessage = message || "Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP.";
+  const whatsappMessage = message || "Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%deploy.";
   
   // Create WhatsApp URL with encoded message
   const whatsappUrl = `https://wa.me/5511989773253?text=${encodeURIComponent(whatsappMessage.replace(/%20/g, ' '))}`;

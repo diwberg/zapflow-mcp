@@ -12,12 +12,12 @@ const Footer = () => {
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="font-bold text-xl text-primary mb-4">Zapflow MCP</h3>
+            <h3 className="font-bold text-xl text-primary mb-4">Zapflow</h3>
             <p className="text-muted mb-4">
               {t('footer.tagline')}
             </p>
             <a
-              href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%20MCP."
+              href="https://wa.me/5511989773253?text=Olá,%20quero%20criar%20uma%20aplicação%20com%20o%20Zapflow%deploy."
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:text-primary-dark font-medium transition-colors"
@@ -75,7 +75,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-border mt-10 pt-6 text-center text-muted">
-          <p>&copy; {currentYear} Zapflow MCP. {t('footer.copyright')}</p>
+          <p>&copy; {currentYear} Zapflow. {t('footer.copyright')}</p>
         </div>
       </div>
     </footer>

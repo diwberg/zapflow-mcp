@@ -15,7 +15,7 @@
   "hero": {
     "badge": "By AI, in real-time",
     "title": "Request your application via WhatsApp. Use it in minutes.",
-    "description": "Zapflow MCP delivers PostgreSQL, Redis, N8N and much more, on demand via AI. Request, pay and use."
+    "description": "Zapflow delivers PostgreSQL, Redis, N8N and much more, on demand via AI. Request, pay and use."
   },
   "howItWorks": {
     "title": "How It Works",
@@ -72,7 +72,7 @@
   },
   "advantages": {
     "title": "Advantages",
-    "subtitle": "Why choose Zapflow MCP for your infrastructure needs.",
+    "subtitle": "Why choose Zapflow deploy for your infrastructure needs.",
     "items": [
       {
         "title": "No technical complications",
@@ -187,7 +187,7 @@
     "lastUpdated": "Last updated:",
     "introduction": {
       "title": "Introduction",
-      "content": "Zapflow MCP is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website and services."
+      "content": "Zapflow is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website and services."
     },
     "informationCollected": {
       "title": "Information We Collect",
@@ -227,11 +227,11 @@
     "lastUpdated": "Last updated:",
     "introduction": {
       "title": "Introduction",
-      "content": "Welcome to Zapflow MCP. These Terms of Service govern your access to and use of our website and services. By accessing or using our services, you agree to be bound by these terms."
+      "content": "Welcome to Zapflow. These Terms of Service govern your access to and use of our website and services. By accessing or using our services, you agree to be bound by these terms."
     },
     "serviceDescription": {
       "title": "Service Description",
-      "content": "Zapflow MCP provides on-demand application provisioning services via WhatsApp, with automated infrastructure."
+      "content": "Zapflow provides on-demand application provisioning services via WhatsApp, with automated infrastructure."
     },
     "userAccounts": {
       "title": "User Accounts",
@@ -247,11 +247,11 @@
     },
     "intellectualProperty": {
       "title": "Intellectual Property",
-      "content": "All content and software made available through our services are the property of Zapflow MCP or its licensors and are protected by intellectual property laws."
+      "content": "All content and software made available through our services are the property of Zapflow or its licensors and are protected by intellectual property laws."
     },
     "limitation": {
       "title": "Limitation of Liability",
-      "content": "In no event shall Zapflow MCP be liable for any indirect, incidental, special, or consequential damages resulting from the use of our services."
+      "content": "In no event shall Zapflow be liable for any indirect, incidental, special, or consequential damages resulting from the use of our services."
     },
     "termination": {
       "title": "Termination",
